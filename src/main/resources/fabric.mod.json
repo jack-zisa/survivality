@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "survivality",
+  "version": "1.1.2-client",
+  "name": "Survivality",
+  "description": "",
+  "authors": [
+    "creoii"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/survivality/icon.png",
+  "environment": "*",
+  "accessWidener": "survivality.accesswidener",
+  "entrypoints": {
+    "client": [
+      "com.github.creoii.survivality.Survivality"
+    ],
+    "main": [
+      "com.github.creoii.survivality.Survivality"
+    ]
+  },
+  "mixins": [
+    "survivality.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "minecraft": "1.19.3"
+  }
+}

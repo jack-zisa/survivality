@@ -1,0 +1,5 @@
+accessWidener v1 named
+accessible method net/minecraft/entity/LivingEntity processEquippedStack (Lnet/minecraft/item/ItemStack;)V
+accessible method net/minecraft/item/CrossbowItem loadProjectile (Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;ZZ)Z
+accessible method net/minecraft/item/CrossbowItem shoot (Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;FZFFF)V
+accessible method net/minecraft/item/CrossbowItem postShoot (Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;)V
