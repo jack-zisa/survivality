@@ -74,8 +74,13 @@ public class SurvivalityConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("general_settings")
-    @ConfigEntry.BoundedDiscrete(min = 1, max = 16)
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 10)
     public int maxSlimeSize = 4;
+
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.Category("general_settings")
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 10)
+    public int maxMagmaCubeSize = 4;
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("general_settings")
@@ -119,5 +124,5 @@ public class SurvivalityConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("general_settings")
-    public boolean allowRocketBoostingEverywhere = false;
+    public boolean allowRocketBoostingEverywhere = true;
 }

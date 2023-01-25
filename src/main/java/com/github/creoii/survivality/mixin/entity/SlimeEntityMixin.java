@@ -4,6 +4,7 @@ import com.github.creoii.survivality.Survivality;
 import com.github.creoii.survivality.integration.ModMenuIntegration;
 import com.github.creoii.survivality.integration.SurvivalityConfig;
 import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -19,9 +20,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class SlimeEntityMixin {
     @Shadow public abstract void setSize(int size, boolean heal);
 
+    @Shadow public abstract EntityType<? extends SlimeEntity> getType();
+
     @Inject(method = "initialize", at = @At("RETURN"))
     private void survivality_biggerSlime(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
-        int i = world.getRandom().nextInt(Survivality.CONFIG.maxSlimeSize);
+        int maxSize;
+        if (getType() == EntityType.MAGMA_CUBE) maxSize = Survivality.CONFIG.maxMagmaCubeSize;
+        else maxSize = Survivality.CONFIG.maxSlimeSize;
+        int i = world.getRandom().nextInt(maxSize);
         if (i < 2 && world.getRandom().nextFloat() < .5f * difficulty.getClampedLocalDifficulty()) {
             ++i;
         }
