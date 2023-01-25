@@ -15,8 +15,8 @@ import net.minecraft.client.color.world.FoliageColors;
  *  To Test:
  *
  *  In Progress:
- *  - Editable Signs
  *  - Variant Spawners
+ *  - Wider Spawner Player Range
  *
  *  To Do:
  *  - Cavalry spawns

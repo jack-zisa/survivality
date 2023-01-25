@@ -1,8 +1,6 @@
 package com.github.creoii.survivality.mixin.entity;
 
 import com.github.creoii.survivality.Survivality;
-import com.github.creoii.survivality.integration.ModMenuIntegration;
-import com.github.creoii.survivality.integration.SurvivalityConfig;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;

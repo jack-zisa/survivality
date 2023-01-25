@@ -18,6 +18,7 @@
     "block.LeavesBlockMixin",
     "block.PointedDripstoneBlockMixin",
     "block.SignBlockEntityMixin",
+    "creative.command.EnchantCommandMixin",
     "enchantment.MultishotEnchantmentMixin",
     "entity.AbstractMinecraftEntityMixin",
     "entity.DrownedEntityMixin",
@@ -33,6 +34,7 @@
     "item.ItemMixin",
     "item.ShovelItemMixin",
     "misc.AnvilScreenHandlerMixin",
+    "misc.MobSpawnerLogicMixin",
     "world.LevelPropertiesMixin",
     "world.MultiNoiseSamplerMixin"
   ]

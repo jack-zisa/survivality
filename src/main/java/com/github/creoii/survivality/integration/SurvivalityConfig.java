@@ -124,5 +124,14 @@ public class SurvivalityConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("general_settings")
-    public boolean allowRocketBoostingEverywhere = true;
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 128)
+    public int spawnerRequiredPlayerRange = 32;
+
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.Category("general_settings")
+    public boolean unrestrictedSpawners = true;
+
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.Category("creative_settings")
+    public boolean unboundEnchant = true;
 }

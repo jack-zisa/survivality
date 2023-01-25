@@ -1,5 +1,8 @@
 {
   "text.autoconfig.survivality.title": "Survivality Config",
+  "text.autoconfig.survivality.category.general_settings": "General Settings",
+  "text.autoconfig.survivality.category.creative_settings": "Creative Settings",
+
   "text.autoconfig.survivality.option.safeCactus": "Safe Cactus",
   "text.autoconfig.survivality.option.safeCactus.@Tooltip": "Cactus blocks don't destroy Cactus items",
   "text.autoconfig.survivality.option.featheryFallingBoots": "Feathery Falling Boots",
@@ -59,5 +62,12 @@
   "text.autoconfig.survivality.option.rocketBoosting.@Tooltip[1]": " - Boats can be boosted in water",
   "text.autoconfig.survivality.option.rocketBoosting.@Tooltip[2]": " - Minecarts can be boosted on rails",
   "text.autoconfig.survivality.option.allowRocketBoostingEverywhere": "Allow Rocket Boosting Everywhere",
-  "text.autoconfig.survivality.option.allowRocketBoostingEverywhere.@Tooltip": "Vehicles can be boosted on land"
+  "text.autoconfig.survivality.option.allowRocketBoostingEverywhere.@Tooltip": "Vehicles can be boosted on land",
+  "text.autoconfig.survivality.option.spawnerRequiredPlayerRange": "Spawner Required Player Range",
+  "text.autoconfig.survivality.option.spawnerRequiredPlayerRange.@Tooltip": "Default range for players to activate spawners",
+  "text.autoconfig.survivality.option.unrestrictedSpawners": "Unrestricted Spawners",
+  "text.autoconfig.survivality.option.unrestrictedSpawners.@Tooltip": "Spawners will spawn regardless of how many mobs are nearby",
+
+  "text.autoconfig.survivality.option.unboundEnchant": "Unbound /enchant",
+  "text.autoconfig.survivality.option.unboundEnchant.@Tooltip": "/enchant allows any level of enchantment"
 }

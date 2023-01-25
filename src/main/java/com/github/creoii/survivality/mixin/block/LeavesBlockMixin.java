@@ -1,7 +1,10 @@
 package com.github.creoii.survivality.mixin.block;
 
 import com.github.creoii.survivality.util.SurvivalityUtils;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
