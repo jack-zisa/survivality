@@ -1,5 +1,6 @@
 package com.github.creoii.survivality.mixin.entity;
 
+import com.github.creoii.survivality.Survivality;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.random.Random;
@@ -14,7 +15,7 @@ public class SheepEntityMixin {
 
     @Inject(method = "generateDefaultColor", at = @At("HEAD"), cancellable = true)
     private static void survivality_randomizeSheepColor(Random random, CallbackInfoReturnable<DyeColor> cir) {
-        if (random.nextInt(200) == 0) {
+        if (Survivality.CONFIG.colorfulSheep && random.nextInt(200) == 0) {
             int i = RANDOM.nextInt(11);
             switch (i) {
                 case 0 -> cir.setReturnValue(DyeColor.BLUE);

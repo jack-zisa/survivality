@@ -1,5 +1,6 @@
 package com.github.creoii.survivality.mixin.entity;
 
+import com.github.creoii.survivality.Survivality;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
@@ -17,6 +18,6 @@ public abstract class AbstractMinecraftEntityMixin extends Entity {
 
     @Inject(method = "getMaxSpeed", at = @At("HEAD"), cancellable = true)
     private void survivality_increaseMaxSpeed(CallbackInfoReturnable<Double> cir) {
-        cir.setReturnValue(isTouchingWater() ? .8d : 1.6d);
+        cir.setReturnValue(isTouchingWater() ? Survivality.CONFIG.maxMinecartSpeed / 2d : Survivality.CONFIG.maxMinecartSpeed);
     }
 }

@@ -1,5 +1,6 @@
 package com.github.creoii.survivality.mixin.entity;
 
+import com.github.creoii.survivality.Survivality;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -20,7 +21,7 @@ public abstract class HorseEntityMixin extends AbstractHorseEntity implements Va
 
     @Override
     public void onStruckByLightning(ServerWorld world, LightningEntity lightning) {
-        if (world.getDifficulty() != Difficulty.PEACEFUL) {
+        if (world.getDifficulty() != Difficulty.PEACEFUL && Survivality.CONFIG.zombieHorseTransmutation) {
             ZombieHorseEntity zombieHorseEntity = EntityType.ZOMBIE_HORSE.create(world);
             if (zombieHorseEntity != null) {
                 zombieHorseEntity.refreshPositionAndAngles(getX(), getY(), getZ(), getYaw(), getPitch());

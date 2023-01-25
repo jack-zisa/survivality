@@ -3,3 +3,6 @@ accessible method net/minecraft/entity/LivingEntity processEquippedStack (Lnet/m
 accessible method net/minecraft/item/CrossbowItem loadProjectile (Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;ZZ)Z
 accessible method net/minecraft/item/CrossbowItem shoot (Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;FZFFF)V
 accessible method net/minecraft/item/CrossbowItem postShoot (Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;)V
+
+accessible field net/minecraft/client/gui/screen/ingame/AnvilScreen TOO_EXPENSIVE_TEXT Lnet/minecraft/text/Text;
+accessible field net/minecraft/entity/vehicle/BoatEntity location Lnet/minecraft/entity/vehicle/BoatEntity$Location;

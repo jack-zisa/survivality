@@ -1,5 +1,6 @@
 package com.github.creoii.survivality.mixin.block;
 
+import com.github.creoii.survivality.Survivality;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CactusBlock;
 import net.minecraft.entity.Entity;
@@ -16,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class CactusBlockMixin {
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
     private void survivality_cactiDontBreakCacti(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
-        if (entity instanceof ItemEntity itemEntity && itemEntity.getStack().isOf(Items.CACTUS)) {
+        if (Survivality.CONFIG.safeCactus && entity instanceof ItemEntity itemEntity && itemEntity.getStack().isOf(Items.CACTUS)) {
             ci.cancel();
         }
     }

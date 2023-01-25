@@ -1,5 +1,6 @@
 package com.github.creoii.survivality.mixin.client;
 
+import com.github.creoii.survivality.Survivality;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.GameRenderer;
@@ -16,8 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class GameRendererMixin {
     @Inject(method = "getNightVisionStrength", at = @At("HEAD"), cancellable = true)
     private static void great_big_world_applyIlluminating(LivingEntity entity, float tickDelta, CallbackInfoReturnable<Float> cir) {
+        if (!Survivality.CONFIG.betterNightVision) return;
         int d = entity.getStatusEffect(StatusEffects.NIGHT_VISION).getDuration();
-        float a = Math.min(.2f * (entity.getStatusEffect(StatusEffects.NIGHT_VISION).getAmplifier() + 1), 1f);
+        float a = Math.min(.2f * (entity.getStatusEffect(StatusEffects.NIGHT_VISION).getAmplifier() + 1), Survivality.CONFIG.maxNightVisionModifier);
         cir.setReturnValue(d > 200 ? a : (a * .7f) + MathHelper.sin((float) ((d - tickDelta) * Math.PI * 0f)) * 0f);
     }
 }

@@ -7,6 +7,7 @@
     "defaultRequire": 1
   },
   "client": [
+    "client.AnvilScreenMixin",
     "client.GameRendererMixin",
     "item.ArmorItemMixin",
     "item.ElytraItemMixin"
@@ -15,17 +16,23 @@
     "block.CactusBlockMixin",
     "block.FarmlandBlockMixin",
     "block.LeavesBlockMixin",
+    "block.PointedDripstoneBlockMixin",
+    "block.SignBlockEntityMixin",
     "enchantment.MultishotEnchantmentMixin",
     "entity.AbstractMinecraftEntityMixin",
+    "entity.DrownedEntityMixin",
     "entity.EyeOfEnderEntityMixin",
+    "entity.FireworkRocketEntityMixin",
     "entity.HorseEntityMixin",
     "entity.PlayerEntityMixin",
     "entity.SheepEntityMixin",
     "entity.SlimeEntityMixin",
     "entity.ZombieHorseEntityMixin",
     "item.CrossbowItemMixin",
+    "item.FireworkRocketItemMixin",
     "item.ItemMixin",
     "item.ShovelItemMixin",
+    "misc.AnvilScreenHandlerMixin",
     "world.LevelPropertiesMixin",
     "world.MultiNoiseSamplerMixin"
   ]

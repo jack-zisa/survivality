@@ -1,5 +1,6 @@
 package com.github.creoii.survivality.mixin.item;
 
+import com.github.creoii.survivality.Survivality;
 import com.github.creoii.survivality.util.SurvivalityUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -26,6 +27,7 @@ public class ArmorItemMixin extends Item implements Wearable {
 
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/TypedActionResult;fail(Ljava/lang/Object;)Lnet/minecraft/util/TypedActionResult;"))
     private void survivality_swapArmor(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
+        if (!Survivality.CONFIG.armorSwapping) return;
         SurvivalityUtils.swapArmor(user);
         if (!world.isClient) {
             user.incrementStat(Stats.USED.getOrCreateStat(this));

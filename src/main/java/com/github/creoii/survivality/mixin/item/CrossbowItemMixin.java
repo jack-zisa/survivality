@@ -40,7 +40,8 @@ public abstract class CrossbowItemMixin {
                 case 1 -> 3;
                 case 2 -> 4;
                 case 3 -> 5;
-                default -> 6;
+                case 4 -> 6;
+                default -> 7;
             };
         } else j = 1;
         boolean bl = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).getAbilities().creativeMode;

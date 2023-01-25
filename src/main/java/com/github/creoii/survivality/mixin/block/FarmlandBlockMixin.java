@@ -1,5 +1,6 @@
 package com.github.creoii.survivality.mixin.block;
 
+import com.github.creoii.survivality.Survivality;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -17,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FarmlandBlockMixin {
     @Inject(method = "onLandedUpon", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/FarmlandBlock;setToDirt(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V"), cancellable = true)
     private void survivality_featherFarmland(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci) {
-        if (entity instanceof LivingEntity livingEntity) {
+        if (Survivality.CONFIG.featheryFallingBoots && entity instanceof LivingEntity livingEntity) {
             if (EnchantmentHelper.getEquipmentLevel(Enchantments.FEATHER_FALLING, livingEntity) > 0) {
                 ci.cancel();
             }
