@@ -1,5 +1,7 @@
 package com.github.creoii.survivality.util;
 
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,6 +17,7 @@ public class SurvivalityUtils {
         if (!player.shouldCancelInteraction()) {
             PlayerInventory inventory = player.getInventory();
             ItemStack selected = inventory.getStack(inventory.selectedSlot);
+            if (EnchantmentHelper.getLevel(Enchantments.BINDING_CURSE, selected) > 0) return;
             if (selected.getItem() instanceof Wearable) {
                 EquipmentSlot slot = MobEntity.getPreferredEquipmentSlot(selected);
                 ItemStack ret = inventory.getArmorStack(slot.getEntitySlotId());
