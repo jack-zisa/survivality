@@ -44,18 +44,7 @@ public abstract class CrossbowItemMixin {
         int i = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, projectile);
         int j;
         if (i > 0) {
-            j = switch (i) {
-                case 1 -> 3;
-                case 2 -> 4;
-                case 3 -> 5;
-                case 4 -> 6;
-                case 5 -> 7;
-                case 6 -> 8;
-                case 7 -> 9;
-                case 8 -> 10;
-                case 9 -> 11;
-                default -> 12;
-            };
+            j = i <= 9 ? i + 2 : 12;
         } else j = 1;
         boolean bl = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).getAbilities().creativeMode;
         ItemStack itemStack = shooter.getArrowType(projectile);
@@ -81,9 +70,10 @@ public abstract class CrossbowItemMixin {
     @Inject(method = "shootAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/CrossbowItem;getSoundPitches(Lnet/minecraft/util/math/random/Random;)[F"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     private static void survivality_shootAllProjectiles(World world, LivingEntity entity, Hand hand, ItemStack stack, float speed, float divergence, CallbackInfo ci, List<ItemStack> list) {
         int level = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, stack);
+        if (level <= 0) return;
         List<Float> simulation;
         if (level > Enchantments.MULTISHOT.getMaxLevel() + 1) simulation = SIMULATIONS.get(10);
-        else simulation = SIMULATIONS.get(level - 1);
+        else simulation = SIMULATIONS.get(Math.max(0, level - 1));
         for (int i = 0; i < list.size(); ++i) {
             ItemStack itemStack = list.get(i);
             boolean bl = entity instanceof PlayerEntity playerEntity && playerEntity.getAbilities().creativeMode;
