@@ -1,23 +1,20 @@
 package com.github.creoii.survivality.mixin.entity;
 
 import com.github.creoii.survivality.Survivality;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LightningEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.VariantHolder;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.ZombieHorseEntity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
-import net.minecraft.entity.passive.HorseColor;
 import net.minecraft.entity.passive.HorseEntity;
+import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(HorseEntity.class)
-public abstract class HorseEntityMixin extends AbstractHorseEntity implements VariantHolder<HorseColor> {
+public abstract class HorseEntityMixin extends AbstractHorseEntity implements InventoryChangedListener, RideableInventory, JumpingMount, Saddleable {
     protected HorseEntityMixin(EntityType<? extends AbstractHorseEntity> entityType, World world) {
         super(entityType, world);
     }

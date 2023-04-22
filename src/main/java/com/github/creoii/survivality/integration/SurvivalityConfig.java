@@ -28,6 +28,10 @@ public class SurvivalityConfig implements ConfigData {
     public boolean editableSigns = true;
 
     @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.Category("general_settings")
+    public boolean armorSwapping = true;
+
+    @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Gui.RequiresRestart(value = false)
     @ConfigEntry.Category("general_settings")
     public boolean betterNightVision = true;

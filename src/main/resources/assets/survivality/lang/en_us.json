@@ -38,6 +38,8 @@
   "text.autoconfig.survivality.option.maxSlimeSize.@Tooltip": "Max size a Slime can spawn as",
   "text.autoconfig.survivality.option.maxMagmaCubeSize": "Max Magma Cube Size",
   "text.autoconfig.survivality.option.maxMagmaCubeSize.@Tooltip": "Max size a Magma Cube can spawn as",
+  "text.autoconfig.survivality.option.armorSwapping": "Armor Swapping",
+  "text.autoconfig.survivality.option.armorSwapping.@Tooltip": "Armor in the hotbar can be swapped with equipped armor",
   "text.autoconfig.survivality.option.moreSnacks": "More Snacks",
   "text.autoconfig.survivality.option.moreSnacks.@Tooltip": "Cookies, Sweet Berries, and Glow Berries are eaten faster",
   "text.autoconfig.survivality.option.shovelableSnow": "Shovelable Snow",
