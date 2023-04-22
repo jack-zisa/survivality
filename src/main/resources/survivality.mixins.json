@@ -8,9 +8,7 @@
   },
   "client": [
     "client.AnvilScreenMixin",
-    "client.GameRendererMixin",
-    "item.ArmorItemMixin",
-    "item.ElytraItemMixin"
+    "client.GameRendererMixin"
   ],
   "mixins": [
     "block.CactusBlockMixin",

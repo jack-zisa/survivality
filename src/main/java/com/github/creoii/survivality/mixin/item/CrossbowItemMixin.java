@@ -47,7 +47,7 @@ public abstract class CrossbowItemMixin {
             j = i <= 9 ? i + 2 : 12;
         } else j = 1;
         boolean bl = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).getAbilities().creativeMode;
-        ItemStack itemStack = shooter.getArrowType(projectile);
+        ItemStack itemStack = shooter.getProjectileType(projectile);
         ItemStack itemStack2 = itemStack.copy();
 
         for (int k = 0; k < j; ++k) {

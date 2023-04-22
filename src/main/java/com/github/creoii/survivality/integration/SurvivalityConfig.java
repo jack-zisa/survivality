@@ -40,7 +40,7 @@ public class SurvivalityConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("general_settings")
-    @ConfigEntry.BoundedDiscrete(min = 1, max = 5)
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 7)
     public int maxMultishotLevel = 4;
 
     @ConfigEntry.Gui.Tooltip
@@ -81,10 +81,6 @@ public class SurvivalityConfig implements ConfigData {
     @ConfigEntry.Category("general_settings")
     @ConfigEntry.BoundedDiscrete(min = 1, max = 10)
     public int maxMagmaCubeSize = 4;
-
-    @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.Category("general_settings")
-    public boolean armorSwapping = true;
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("general_settings")
