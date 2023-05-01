@@ -13,10 +13,9 @@ import net.minecraft.client.color.world.FoliageColors;
 
 /**
  *  To Test:
+ *  - Wider Spawner Player Range
  *
  *  In Progress:
- *  - Wider Spawner Player Range
- *  - Boats Ignore Lily Pads
  *
  *  To Do:
  */
