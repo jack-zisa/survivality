@@ -20,10 +20,12 @@
     "enchantment.MultishotEnchantmentMixin",
     "entity.AbstractMinecraftEntityMixin",
     "entity.DrownedEntityMixin",
+    "entity.EntityMixin",
     "entity.EyeOfEnderEntityMixin",
     "entity.FireworkRocketEntityMixin",
     "entity.HorseEntityMixin",
     "entity.PlayerEntityMixin",
+    "entity.PolarBearEntityMixin",
     "entity.SheepEntityMixin",
     "entity.SlimeEntityMixin",
     "entity.ZombieHorseEntityMixin",
@@ -33,6 +35,7 @@
     "item.ShovelItemMixin",
     "misc.AnvilScreenHandlerMixin",
     "misc.MobSpawnerLogicMixin",
+    "world.DungeonFeatureMixin",
     "world.LevelPropertiesMixin",
     "world.MultiNoiseSamplerMixin"
   ]
