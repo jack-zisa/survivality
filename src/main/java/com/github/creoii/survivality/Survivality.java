@@ -15,12 +15,10 @@ import net.minecraft.client.color.world.FoliageColors;
  *  To Test:
  *
  *  In Progress:
- *  - Variant Spawners
  *  - Wider Spawner Player Range
+ *  - Boats Ignore Lily Pads
  *
  *  To Do:
- *  - Cavalry spawns
- *  - Rocket Vehicle Boosting
  */
 public class Survivality implements ModInitializer, ClientModInitializer {
 	public static final String NAMESPACE = "survivality";
