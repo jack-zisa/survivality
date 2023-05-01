@@ -136,6 +136,10 @@ public class SurvivalityConfig implements ConfigData {
     public float polarBearCavalryChance = .01f;
 
     @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.Category("general_settings")
+    public boolean boatsIgnoreWaterlilies = true;
+
+    @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("creative_settings")
     public boolean unboundEnchant = true;
 }

@@ -67,6 +67,11 @@
   "text.autoconfig.survivality.option.spawnerRequiredPlayerRange.@Tooltip": "Default range for players to activate spawners",
   "text.autoconfig.survivality.option.unrestrictedSpawners": "Unrestricted Spawners",
   "text.autoconfig.survivality.option.unrestrictedSpawners.@Tooltip": "Spawners will spawn regardless of how many mobs are nearby",
+  "text.autoconfig.survivality.option.polarBearCavalryChance": "Polar Bear Cavalry Chance",
+  "text.autoconfig.survivality.option.polarBearCavalryChance.@Tooltip": "Chance for Polar Bears to spawn with a Stray on their back",
+  "text.autoconfig.survivality.option.boatsIgnoreWaterlilies": "Boats Ignore Waterlilies",
+  "text.autoconfig.survivality.option.boatsIgnoreWaterlilies.@Tooltip": "Boats do not collide with Lily Pads, but they still break them",
+
   "text.autoconfig.survivality.option.unboundEnchant": "Unbound /enchant",
   "text.autoconfig.survivality.option.unboundEnchant.@Tooltip": "/enchant allows any level of enchantment"
 }
