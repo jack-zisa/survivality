@@ -25,7 +25,7 @@ public class LevelPropertiesMixin {
     private static final Random RANDOM = Random.createLocal();
 
     @Inject(method = "<init>(Lnet/minecraft/world/level/LevelInfo;Lnet/minecraft/world/gen/GeneratorOptions;Lcom/mojang/serialization/Lifecycle;)V", at = @At("TAIL"))
-    private void great_big_world_startWorldRandomly(LevelInfo levelInfo, GeneratorOptions generatorOptions, Lifecycle lifecycle, CallbackInfo ci) {
+    private void survivality_startWorldRandomly(LevelInfo levelInfo, GeneratorOptions generatorOptions, Lifecycle lifecycle, CallbackInfo ci) {
         if (Survivality.CONFIG.randomWorldStartTime) {
             timeOfDay = RANDOM.nextInt(24000);
         }

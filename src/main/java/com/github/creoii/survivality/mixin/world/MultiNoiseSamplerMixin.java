@@ -19,7 +19,7 @@ public class MultiNoiseSamplerMixin {
     @Mutable @Shadow @Final private List<MultiNoiseUtil.NoiseHypercube> spawnTarget;
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void great_big_world_randomSpawnBiomes(DensityFunction densityFunction, DensityFunction densityFunction2, DensityFunction densityFunction3, DensityFunction densityFunction4, DensityFunction densityFunction5, DensityFunction densityFunction6, List list, CallbackInfo ci) {
+    private void survivality_randomSpawnBiomes(DensityFunction densityFunction, DensityFunction densityFunction2, DensityFunction densityFunction3, DensityFunction densityFunction4, DensityFunction densityFunction5, DensityFunction densityFunction6, List list, CallbackInfo ci) {
         if (!Survivality.CONFIG.randomWorldStartBiome) return;
         spawnTarget = Lists.newArrayList(MultiNoiseUtil.createNoiseHypercube(MultiNoiseUtil.ParameterRange.of(-1f, 1f), MultiNoiseUtil.ParameterRange.of(-1f, 1f), MultiNoiseUtil.ParameterRange.of(-1f, 1f), MultiNoiseUtil.ParameterRange.of(-1f, 1f), MultiNoiseUtil.ParameterRange.of(-1f, 1f), MultiNoiseUtil.ParameterRange.of(-1f, 1f), 0f));
     }
