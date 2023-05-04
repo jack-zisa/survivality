@@ -17,7 +17,7 @@ import java.util.List;
 
 @Mixin(LithiumEntityCollisions.class)
 public class LithiumEntityCollisionsMixin {
-    @Inject(method = "getBlockCollisions(Lnet/minecraft/world/World;Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/Box;)Ljava/util/List;", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "getBlockCollisions(Lnet/minecraft/world/World;Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/Box;)Ljava/util/List;", at = @At("HEAD"), cancellable = true)
     private static void survivality_lithiumCompatBoatsIgnoreWaterlilies(World world, Entity entity, Box box, CallbackInfoReturnable<List<VoxelShape>> cir) {
         if (entity instanceof BoatEntity && Survivality.CONFIG.boatsIgnoreWaterlilies)
             cir.setReturnValue(new BoatBlockCollisionSpliterator(world, entity, box).collectAll());
