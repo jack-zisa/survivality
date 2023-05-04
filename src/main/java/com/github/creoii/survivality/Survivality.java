@@ -15,12 +15,8 @@ import net.minecraft.client.color.world.FoliageColors;
  *  To Test:
  *
  *  In Progress:
- *  - Variant Spawners
- *  - Wider Spawner Player Range
  *
  *  To Do:
- *  - Cavalry spawns
- *  - Rocket Vehicle Boosting
  */
 public class Survivality implements ModInitializer, ClientModInitializer {
 	public static final String NAMESPACE = "survivality";
@@ -37,7 +33,7 @@ public class Survivality implements ModInitializer, ClientModInitializer {
 		if (Survivality.CONFIG.snowyLeaves) {
 			ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
 				if (state != null) {
-					if (state.get(SurvivalityUtils.SNOWY)) {
+					if (state.getProperties().contains(SurvivalityUtils.SNOWY) && state.get(SurvivalityUtils.SNOWY)) {
 						return 16777215;
 					}
 
