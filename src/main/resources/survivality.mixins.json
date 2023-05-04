@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "com.github.creoii.survivality.mixin",
   "compatibilityLevel": "JAVA_17",
+  "plugin": "com.github.creoii.survivality.util.SurvivalityMixinPlugin",
   "injectors": {
     "defaultRequire": 1
   },
@@ -18,11 +19,11 @@
     "block.LeavesBlockMixin",
     "block.PointedDripstoneBlockMixin",
     "block.SignBlockEntityMixin",
+    "compat.LithiumEntityCollisionsMixin",
     "creative.command.EnchantCommandMixin",
     "enchantment.MultishotEnchantmentMixin",
     "entity.AbstractMinecraftEntityMixin",
     "entity.DrownedEntityMixin",
-    "entity.EntityMixin",
     "entity.EyeOfEnderEntityMixin",
     "entity.FireworkRocketEntityMixin",
     "entity.HorseEntityMixin",
@@ -37,6 +38,7 @@
     "item.ShovelItemMixin",
     "misc.AnvilScreenHandlerMixin",
     "misc.MobSpawnerLogicMixin",
+    "world.CollisionViewMixin",
     "world.DungeonFeatureMixin",
     "world.LevelPropertiesMixin",
     "world.MultiNoiseSamplerMixin"

@@ -14,6 +14,9 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.CollisionView;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BoatBlockCollisionSpliterator extends AbstractIterator<VoxelShape> {
     private final Box box;
     private final ShapeContext context;
@@ -21,22 +24,16 @@ public class BoatBlockCollisionSpliterator extends AbstractIterator<VoxelShape> 
     private final BlockPos.Mutable pos;
     private final VoxelShape boxShape;
     private final CollisionView world;
-    private final boolean forEntity;
     @Nullable
     private BlockView chunk;
     private long chunkPos;
 
     public BoatBlockCollisionSpliterator(CollisionView world, @Nullable Entity entity, Box box) {
-        this(world, entity, box, false);
-    }
-
-    public BoatBlockCollisionSpliterator(CollisionView world, @Nullable Entity entity, Box box, boolean forEntity) {
         this.context = entity == null ? ShapeContext.absent() : ShapeContext.of(entity);
         this.pos = new BlockPos.Mutable();
         this.boxShape = VoxelShapes.cuboid(box);
         this.world = world;
         this.box = box;
-        this.forEntity = forEntity;
         int i = MathHelper.floor(box.minX - 1.0E-7) - 1;
         int j = MathHelper.floor(box.maxX + 1.0E-7) + 1;
         int k = MathHelper.floor(box.minY - 1.0E-7) - 1;
@@ -80,20 +77,20 @@ public class BoatBlockCollisionSpliterator extends AbstractIterator<VoxelShape> 
                 this.pos.set(i, j, k);
                 BlockState blockState = blockView.getBlockState(this.pos);
                 if (blockState.isOf(Blocks.LILY_PAD)) continue;
-                if (this.forEntity && !blockState.shouldSuffocate(blockView, this.pos) || l == 1 && !blockState.exceedsCube() || l == 2 && !blockState.isOf(Blocks.MOVING_PISTON)) {
+                if (!blockState.shouldSuffocate(blockView, this.pos) || l == 1 && !blockState.exceedsCube() || l == 2 && !blockState.isOf(Blocks.MOVING_PISTON)) {
                     continue;
                 }
 
                 VoxelShape voxelShape = blockState.getCollisionShape(this.world, this.pos, this.context);
                 if (voxelShape == VoxelShapes.fullCube()) {
-                    if (!this.box.intersects((double)i, (double)j, (double)k, (double)i + 1.0, (double)j + 1.0, (double)k + 1.0)) {
+                    if (!this.box.intersects(i, j, k, (double)i + 1.0, (double)j + 1.0, (double)k + 1.0)) {
                         continue;
                     }
 
-                    return voxelShape.offset((double)i, (double)j, (double)k);
+                    return voxelShape.offset(i, j, k);
                 }
 
-                VoxelShape voxelShape2 = voxelShape.offset((double)i, (double)j, (double)k);
+                VoxelShape voxelShape2 = voxelShape.offset(i, j, k);
                 if (!VoxelShapes.matchesAnywhere(voxelShape2, this.boxShape, BooleanBiFunction.AND)) {
                     continue;
                 }
@@ -101,7 +98,17 @@ public class BoatBlockCollisionSpliterator extends AbstractIterator<VoxelShape> 
                 return voxelShape2;
             }
 
-            return (VoxelShape)this.endOfData();
+            return this.endOfData();
         }
+    }
+
+    public List<VoxelShape> collectAll() {
+        ArrayList<VoxelShape> collisions = new ArrayList<>();
+
+        while(this.hasNext()) {
+            collisions.add(this.next());
+        }
+
+        return collisions;
     }
 }

@@ -34,7 +34,7 @@ public class Survivality implements ModInitializer, ClientModInitializer {
 		if (Survivality.CONFIG.snowyLeaves) {
 			ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
 				if (state != null) {
-					if (state.get(SurvivalityUtils.SNOWY)) {
+					if (state.getProperties().contains(SurvivalityUtils.SNOWY) && state.get(SurvivalityUtils.SNOWY)) {
 						return 16777215;
 					}
 
