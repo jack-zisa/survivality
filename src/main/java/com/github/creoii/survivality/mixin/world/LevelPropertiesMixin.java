@@ -26,7 +26,7 @@ public class LevelPropertiesMixin {
 
     @SuppressWarnings("deprecation")
     @Inject(method = "<init>(Lnet/minecraft/world/level/LevelInfo;Lnet/minecraft/world/gen/GeneratorOptions;Lnet/minecraft/world/level/LevelProperties$SpecialProperty;Lcom/mojang/serialization/Lifecycle;)V", at = @At("TAIL"))
-    private void great_big_world_startWorldRandomly(LevelInfo levelInfo, GeneratorOptions generatorOptions, LevelProperties.SpecialProperty specialProperty, Lifecycle lifecycle, CallbackInfo ci) {
+    private void survivality_startWorldRandomly(LevelInfo levelInfo, GeneratorOptions generatorOptions, LevelProperties.SpecialProperty specialProperty, Lifecycle lifecycle, CallbackInfo ci) {
         if (Survivality.CONFIG.randomWorldStartTime) {
             timeOfDay = RANDOM.nextInt(24000);
         }
