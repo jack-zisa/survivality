@@ -29,6 +29,7 @@
     "entity.PolarBearEntityMixin",
     "entity.SheepEntityMixin",
     "entity.SlimeEntityMixin",
+    "entity.StrayEntityMixin",
     "entity.ZombieHorseEntityMixin",
     "item.CrossbowItemMixin",
     "item.FireworkRocketItemMixin",

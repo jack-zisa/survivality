@@ -18,6 +18,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+
 @Mixin(PolarBearEntity.class)
 public abstract class PolarBearEntityMixin extends AnimalEntity implements Angerable {
     protected PolarBearEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) {
@@ -27,11 +30,16 @@ public abstract class PolarBearEntityMixin extends AnimalEntity implements Anger
     @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/AnimalEntity;initialize(Lnet/minecraft/world/ServerWorldAccess;Lnet/minecraft/world/LocalDifficulty;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/entity/EntityData;Lnet/minecraft/nbt/NbtCompound;)Lnet/minecraft/entity/EntityData;"))
     private void survivality_polarBearCavalry(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
         Random random = world.getRandom();
-        if (random.nextFloat() <= Survivality.CONFIG.polarBearCavalryChance) {
+        if (random.nextFloat() <= Survivality.CONFIG.polarBearCavalryChance && spawnReason == SpawnReason.NATURAL) {
             StrayEntity strayEntity = EntityType.STRAY.create(this.world);
             strayEntity.refreshPositionAndAngles(getX(), getY(), getZ(), getYaw(), 0f);
             strayEntity.initialize(world, difficulty, spawnReason, null, null);
-            strayEntity.startRiding(this);
+
+            LocalDate localDate = LocalDate.now();
+            if (localDate.get(ChronoField.DAY_OF_MONTH) == 4 && localDate.get(ChronoField.MONTH_OF_YEAR) == 1) {
+                startRiding(strayEntity);
+                world.spawnEntity(strayEntity);
+            } else strayEntity.startRiding(this);
         }
     }
 }
