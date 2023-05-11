@@ -19,7 +19,10 @@ public class GameRendererMixin {
     private static void great_big_world_applyIlluminating(LivingEntity entity, float tickDelta, CallbackInfoReturnable<Float> cir) {
         if (!Survivality.CONFIG.betterNightVision) return;
         int d = entity.getStatusEffect(StatusEffects.NIGHT_VISION).getDuration();
-        float a = Math.min(.2f * (entity.getStatusEffect(StatusEffects.NIGHT_VISION).getAmplifier() + 1), Survivality.CONFIG.maxNightVisionModifier);
-        cir.setReturnValue(d > 200 ? a : (a * .7f) + MathHelper.sin((float) ((d - tickDelta) * Math.PI * 0f)) * 0f);
+        int amplifier = entity.getStatusEffect(StatusEffects.NIGHT_VISION).getAmplifier();
+        if (amplifier <= 25) {
+            float a = Math.min(.2f * (amplifier + 1), Survivality.CONFIG.maxNightVisionModifier);
+            cir.setReturnValue(d > 200 ? a : (a * .7f) + MathHelper.sin((float) ((d - tickDelta) * Math.PI * 0f)) * 0f);
+        } else cir.setReturnValue(Survivality.CONFIG.maxNightVisionModifier);
     }
 }
