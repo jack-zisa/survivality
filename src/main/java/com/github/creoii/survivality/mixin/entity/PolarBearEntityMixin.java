@@ -36,7 +36,7 @@ public abstract class PolarBearEntityMixin extends AnimalEntity implements Anger
             strayEntity.initialize(world, difficulty, spawnReason, null, null);
 
             LocalDate localDate = LocalDate.now();
-            if (localDate.get(ChronoField.DAY_OF_MONTH) == 4 && localDate.get(ChronoField.MONTH_OF_YEAR) == 1) {
+            if (localDate.get(ChronoField.DAY_OF_MONTH) == 1 && localDate.get(ChronoField.MONTH_OF_YEAR) == 4) {
                 startRiding(strayEntity);
                 world.spawnEntity(strayEntity);
             } else strayEntity.startRiding(this);
