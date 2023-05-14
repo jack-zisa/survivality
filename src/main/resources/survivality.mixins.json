@@ -17,6 +17,7 @@
     "block.LeavesBlockMixin",
     "block.PointedDripstoneBlockMixin",
     "block.SignBlockEntityMixin",
+    "compat.AppleLeavesBlockMixin",
     "compat.LithiumEntityCollisionsMixin",
     "creative.command.EnchantCommandMixin",
     "enchantment.MultishotEnchantmentMixin",
