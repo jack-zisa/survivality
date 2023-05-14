@@ -25,7 +25,6 @@ public class Survivality implements ModInitializer, ClientModInitializer {
 	@Override
 	public void onInitialize() {
 		AutoConfig.register(SurvivalityConfig.class, JanksonConfigSerializer::new);
-		CONFIG = AutoConfig.getConfigHolder(SurvivalityConfig.class).getConfig();
 	}
 
 	@Override
