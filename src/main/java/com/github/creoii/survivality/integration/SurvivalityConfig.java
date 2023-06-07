@@ -15,10 +15,6 @@ public class SurvivalityConfig implements ConfigData {
     @ConfigEntry.Category("general_settings")
     public boolean featheryFallingBoots = true;
 
-    @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.Category("general_settings")
-    public boolean snowyLeaves = true;
-
     @ConfigEntry.Gui.Tooltip(count = 2)
     @ConfigEntry.Category("general_settings")
     public boolean unstableDripstone = true;

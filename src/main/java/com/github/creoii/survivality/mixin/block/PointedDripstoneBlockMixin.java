@@ -21,7 +21,7 @@ public class PointedDripstoneBlockMixin {
     private void survivality_unstableDripstone(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile, CallbackInfo ci) {
         if (!Survivality.CONFIG.unstableDripstone) return;
         BlockPos hitPos = hit.getBlockPos();
-        if (!world.isClient && projectile.canModifyAt(world, hitPos) && projectile.getType().isIn(SurvivalityTags.EntityTypes.BREAK_DRIPSTONE) && projectile.getVelocity().length() > .6d) {
+        if (!world.isClient && projectile.canModifyAt(world, hitPos) && projectile.getType().isIn(SurvivalityTags.BREAK_DRIPSTONE) && projectile.getVelocity().length() > .6d) {
             world.breakBlock(hitPos, true);
         }
         ci.cancel();
