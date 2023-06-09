@@ -23,8 +23,8 @@ public abstract class SlimeEntityMixin {
     @Inject(method = "initialize", at = @At("RETURN"))
     private void survivality_biggerSlime(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
         int maxSize;
-        if (getType() == EntityType.MAGMA_CUBE) maxSize = Survivality.CONFIG.maxMagmaCubeSize;
-        else maxSize = Survivality.CONFIG.maxSlimeSize;
+        if (getType() == EntityType.MAGMA_CUBE) maxSize = Survivality.CONFIG.maxMagmaCubeSize.intValue();
+        else maxSize = Survivality.CONFIG.maxSlimeSize.intValue();
         int i = world.getRandom().nextInt(maxSize);
         if (i < 2 && world.getRandom().nextFloat() < .5f * difficulty.getClampedLocalDifficulty()) {
             ++i;

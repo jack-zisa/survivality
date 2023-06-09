@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PointedDripstoneBlockMixin {
     @Inject(method = "onProjectileHit", at = @At("TAIL"), cancellable = true)
     private void survivality_unstableDripstone(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile, CallbackInfo ci) {
-        if (!Survivality.CONFIG.unstableDripstone) return;
+        if (!Survivality.CONFIG.unstableDripstone.booleanValue()) return;
         BlockPos hitPos = hit.getBlockPos();
         if (!world.isClient && projectile.canModifyAt(world, hitPos) && projectile.getType().isIn(SurvivalityTags.BREAK_DRIPSTONE) && projectile.getVelocity().length() > .6d) {
             world.breakBlock(hitPos, true);
@@ -29,7 +29,7 @@ public class PointedDripstoneBlockMixin {
 
     @Inject(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/PointedDripstoneBlock;tryGrow(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/random/Random;)V"), cancellable = true)
     private void survivality_dripstoneRandomlyFall(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (Survivality.CONFIG.unstableDripstone && random.nextInt(3) == 0 && !world.isClient) {
+        if (Survivality.CONFIG.unstableDripstone.booleanValue() && random.nextInt(3) == 0 && !world.isClient) {
             world.breakBlock(pos, true);
             ci.cancel();
         }

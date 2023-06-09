@@ -18,6 +18,6 @@ public abstract class AbstractMinecraftEntityMixin extends Entity {
 
     @Inject(method = "getMaxSpeed", at = @At("HEAD"), cancellable = true)
     private void survivality_increaseMaxSpeed(CallbackInfoReturnable<Double> cir) {
-        cir.setReturnValue(isTouchingWater() ? Survivality.CONFIG.maxMinecartSpeed / 2d : Survivality.CONFIG.maxMinecartSpeed);
+        cir.setReturnValue(isTouchingWater() ? Survivality.CONFIG.maxMinecartSpeed.doubleValue() / 2d : Survivality.CONFIG.maxMinecartSpeed.doubleValue());
     }
 }

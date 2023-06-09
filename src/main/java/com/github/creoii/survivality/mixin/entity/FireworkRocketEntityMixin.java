@@ -17,9 +17,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class FireworkRocketEntityMixin {
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isFallFlying()Z"))
     private boolean survivality_rocketBoosting(LivingEntity instance) {
-        if (!Survivality.CONFIG.rocketBoosting) return instance.isFallFlying();
+        if (!Survivality.CONFIG.rocketBoosting.booleanValue()) return instance.isFallFlying();
         Entity vehicle = instance.getVehicle();
-        if ((vehicle != null && vehicle.getType().isIn(SurvivalityTags.EntityTypes.BOOSTABLE_VEHICLES))) {
+        if ((vehicle != null && vehicle.getType().isIn(SurvivalityTags.BOOSTABLE_VEHICLES))) {
             if (vehicle instanceof AbstractMinecartEntity minecartEntity) {
                 return AbstractRailBlock.isRail(minecartEntity.getBlockStateAtPos());
             } else if (vehicle instanceof BoatEntity boatEntity) {
@@ -34,7 +34,7 @@ public class FireworkRocketEntityMixin {
         double velocityX = vec3d.x * .1d + (vec3d.x * 1.5d - vec3d.x) * .5d;
         double velocityZ = vec3d.z * .1d + (vec3d.z * 1.5d - vec3d.z) * .5d;
         Entity vehicle = instance.getVehicle();
-        if (vehicle != null && vehicle.getType().isIn(SurvivalityTags.EntityTypes.BOOSTABLE_VEHICLES)) {
+        if (vehicle != null && vehicle.getType().isIn(SurvivalityTags.BOOSTABLE_VEHICLES)) {
             Vec3d vehicleVelocity = new Vec3d(vec3d.x, 0d, vec3d.z);
             vehicle.setVelocity(vehicleVelocity.add(velocityX, 0d, velocityZ));
         } else instance.setVelocity(vec3d.add(velocityX, vec3d.y * .1d + (vec3d.y * 1.5d - vec3d.y) * .5d, velocityZ));

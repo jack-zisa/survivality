@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class EnchantCommandMixin {
     @Redirect(method = "execute", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;getMaxLevel()I", ordinal = 0))
     private static int survivality_unboundEnchant(Enchantment instance) {
-        if (Survivality.CONFIG.unboundEnchant) {
+        if (Survivality.CONFIG.unboundEnchant.booleanValue()) {
             return 127;
         } else return instance.getMaxLevel();
     }

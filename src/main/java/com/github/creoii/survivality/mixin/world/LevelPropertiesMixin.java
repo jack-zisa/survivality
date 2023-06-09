@@ -27,15 +27,15 @@ public class LevelPropertiesMixin {
     @SuppressWarnings("deprecation")
     @Inject(method = "<init>(Lnet/minecraft/world/level/LevelInfo;Lnet/minecraft/world/gen/GeneratorOptions;Lnet/minecraft/world/level/LevelProperties$SpecialProperty;Lcom/mojang/serialization/Lifecycle;)V", at = @At("TAIL"))
     private void survivality_startWorldRandomly(LevelInfo levelInfo, GeneratorOptions generatorOptions, LevelProperties.SpecialProperty specialProperty, Lifecycle lifecycle, CallbackInfo ci) {
-        if (Survivality.CONFIG.randomWorldStartTime) {
+        if (Survivality.CONFIG.randomWorldStartTime.booleanValue()) {
             timeOfDay = RANDOM.nextInt(24000);
         }
-        if (Survivality.CONFIG.randomWorldStartSpawnPos) {
+        if (Survivality.CONFIG.randomWorldStartSpawnPos.booleanValue()) {
             spawnX = RANDOM.nextInt(24000);
             spawnZ = RANDOM.nextInt(24000);
             spawnAngle = (float)RANDOM.nextInt(360);
         }
-        if (Survivality.CONFIG.randomWorldStartWeather) {
+        if (Survivality.CONFIG.randomWorldStartWeather.booleanValue()) {
             rainTime = RANDOM.nextInt(180000);
             raining = RANDOM.nextInt(5) == 0;
             thunderTime = RANDOM.nextInt(180000);

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public interface CollisionViewMixin {
     @Inject(method = "getBlockCollisions", at = @At("HEAD"), cancellable = true)
     private void survivality_boatsIgnoreWaterlilies(@Nullable Entity entity, Box box, CallbackInfoReturnable<Iterable<VoxelShape>> cir) {
-        if (entity instanceof BoatEntity && Survivality.CONFIG.boatsIgnoreWaterlilies) {
+        if (entity instanceof BoatEntity && Survivality.CONFIG.boatsIgnoreWaterlilies.booleanValue()) {
             cir.setReturnValue(() -> new BoatBlockCollisionSpliterator((CollisionView) this, entity, box));
         }
     }

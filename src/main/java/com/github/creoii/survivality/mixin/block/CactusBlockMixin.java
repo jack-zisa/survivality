@@ -10,15 +10,22 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CactusBlock.class)
 public class CactusBlockMixin {
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
     private void survivality_cactiDontBreakCacti(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
-        if (Survivality.CONFIG.safeCactus && entity instanceof ItemEntity itemEntity && itemEntity.getStack().isOf(Items.CACTUS)) {
+        if (Survivality.CONFIG.safeCactus.booleanValue() && entity instanceof ItemEntity itemEntity && itemEntity.getStack().isOf(Items.CACTUS)) {
             ci.cancel();
         }
+    }
+
+    @ModifyConstant(method = "randomTick", constant = @Constant(intValue = 3))
+    private int survivality_increaseCactusHeight(int constant) {
+        return Survivality.CONFIG.cactusGrowHeight.intValue();
     }
 }

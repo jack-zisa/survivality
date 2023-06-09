@@ -15,7 +15,7 @@ public class SheepEntityMixin {
 
     @Inject(method = "generateDefaultColor", at = @At("HEAD"), cancellable = true)
     private static void survivality_randomizeSheepColor(Random random, CallbackInfoReturnable<DyeColor> cir) {
-        if (Survivality.CONFIG.colorfulSheep && random.nextInt(200) == 0) {
+        if (Survivality.CONFIG.colorfulSheep.booleanValue() && random.nextInt(200) == 0) {
             int i = RANDOM.nextInt(11);
             switch (i) {
                 case 0 -> cir.setReturnValue(DyeColor.BLUE);

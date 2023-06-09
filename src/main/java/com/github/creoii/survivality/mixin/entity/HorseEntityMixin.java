@@ -24,7 +24,7 @@ public abstract class HorseEntityMixin extends AbstractHorseEntity implements Va
 
     @Override
     public void onStruckByLightning(ServerWorld world, LightningEntity lightning) {
-        if (world.getDifficulty() != Difficulty.PEACEFUL && Survivality.CONFIG.zombieHorseTransmutation) {
+        if (world.getDifficulty() != Difficulty.PEACEFUL && Survivality.CONFIG.zombieHorseTransmutation.booleanValue()) {
             ZombieHorseEntity zombieHorseEntity = EntityType.ZOMBIE_HORSE.create(world);
             if (zombieHorseEntity != null) {
                 zombieHorseEntity.refreshPositionAndAngles(getX(), getY(), getZ(), getYaw(), getPitch());

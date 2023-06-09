@@ -13,9 +13,6 @@
   "environment": "*",
   "accessWidener": "survivality.accesswidener",
   "entrypoints": {
-    "client": [
-      "com.github.creoii.survivality.Survivality"
-    ],
     "main": [
       "com.github.creoii.survivality.Survivality"
     ],
@@ -28,6 +25,6 @@
   ],
   "depends": {
     "fabricloader": ">=0.4.0",
-    "minecraft": "1.19.4"
+    "minecraft": "1.20"
   }
 }

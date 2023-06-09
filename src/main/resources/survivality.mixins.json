@@ -14,10 +14,8 @@
   "mixins": [
     "block.CactusBlockMixin",
     "block.FarmlandBlockMixin",
-    "block.LeavesBlockMixin",
     "block.PointedDripstoneBlockMixin",
-    "block.SignBlockEntityMixin",
-    "compat.AppleLeavesBlockMixin",
+    "block.SugarCaneBlockMixin",
     "compat.LithiumEntityCollisionsMixin",
     "creative.command.EnchantCommandMixin",
     "enchantment.MultishotEnchantmentMixin",

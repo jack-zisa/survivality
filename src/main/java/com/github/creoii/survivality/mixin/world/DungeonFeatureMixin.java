@@ -24,7 +24,7 @@ public abstract class DungeonFeatureMixin {
 
     @Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/MobSpawnerBlockEntity;setEntityType(Lnet/minecraft/entity/EntityType;Lnet/minecraft/util/math/random/Random;)V", shift = At.Shift.AFTER))
     private void survivality_variantSpawners(FeatureContext<DefaultFeatureConfig> context, CallbackInfoReturnable<Boolean> cir) {
-        if (!Survivality.CONFIG.variantSpawners) return;
+        if (!Survivality.CONFIG.variantSpawners.booleanValue()) return;
         BlockPos blockPos = context.getOrigin();
         Random random = context.getRandom();
         StructureWorldAccess structureWorldAccess = context.getWorld();

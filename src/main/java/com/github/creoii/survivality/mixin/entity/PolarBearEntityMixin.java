@@ -30,8 +30,8 @@ public abstract class PolarBearEntityMixin extends AnimalEntity implements Anger
     @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/AnimalEntity;initialize(Lnet/minecraft/world/ServerWorldAccess;Lnet/minecraft/world/LocalDifficulty;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/entity/EntityData;Lnet/minecraft/nbt/NbtCompound;)Lnet/minecraft/entity/EntityData;"))
     private void survivality_polarBearCavalry(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
         Random random = world.getRandom();
-        if (random.nextFloat() <= Survivality.CONFIG.polarBearCavalryChance && spawnReason == SpawnReason.NATURAL) {
-            StrayEntity strayEntity = EntityType.STRAY.create(this.world);
+        if (random.nextFloat() <= Survivality.CONFIG.polarBearCavalryChance.floatValue() && spawnReason == SpawnReason.NATURAL) {
+            StrayEntity strayEntity = EntityType.STRAY.create(getWorld());
             strayEntity.refreshPositionAndAngles(getX(), getY(), getZ(), getYaw(), 0f);
             strayEntity.initialize(world, difficulty, spawnReason, null, null);
 

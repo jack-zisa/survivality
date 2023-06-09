@@ -15,6 +15,6 @@ public abstract class MultishotEnchantmentMixin extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return Survivality.CONFIG.maxMultishotLevel;
+        return Survivality.CONFIG.maxMultishotLevel.intValue();
     }
 }

@@ -22,6 +22,6 @@ public abstract class DrownedEntityMixin extends ZombieEntity implements RangedA
 
     @Inject(method = "initEquipment", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/DrownedEntity;equipStack(Lnet/minecraft/entity/EquipmentSlot;Lnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 0))
     private void survivality_moreTridents(Random random, LocalDifficulty localDifficulty, CallbackInfo ci) {
-        setEquipmentDropChance(EquipmentSlot.MAINHAND, Survivality.CONFIG.tridentDropRate);
+        setEquipmentDropChance(EquipmentSlot.MAINHAND, Survivality.CONFIG.tridentDropRate.floatValue());
     }
 }

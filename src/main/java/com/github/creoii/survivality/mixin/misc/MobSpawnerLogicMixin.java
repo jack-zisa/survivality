@@ -13,8 +13,8 @@ public class MobSpawnerLogicMixin {
     @Inject(method = "writeNbt", at = @At("TAIL"))
     private void survivality_increaseRequiredPlayerRange(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir) {
         nbt.remove("RequiredPlayerRange");
-        nbt.putShort("RequiredPlayerRange", (short) Survivality.CONFIG.spawnerRequiredPlayerRange);
-        if (Survivality.CONFIG.unrestrictedSpawners) {
+        nbt.putShort("RequiredPlayerRange", (short) Survivality.CONFIG.spawnerRequiredPlayerRange.intValue());
+        if (Survivality.CONFIG.unrestrictedSpawners.booleanValue()) {
             nbt.remove("MaxNearbyEntities");
             nbt.putShort("MaxNearbyEntities", (short) 0);
         }

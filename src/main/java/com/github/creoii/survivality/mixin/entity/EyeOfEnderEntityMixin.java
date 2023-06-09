@@ -23,6 +23,6 @@ public abstract class EyeOfEnderEntityMixin extends Entity implements FlyingItem
 
     @Inject(method = "initTargetPos", at = @At("TAIL"))
     private void survivality_dontBreakEyeOfEnder(BlockPos pos, CallbackInfo ci) {
-        dropsItem = random.nextFloat() < Survivality.CONFIG.eyeOfEnderBreakChance;
+        dropsItem = random.nextFloat() < Survivality.CONFIG.eyeOfEnderBreakChance.floatValue();
     }
 }

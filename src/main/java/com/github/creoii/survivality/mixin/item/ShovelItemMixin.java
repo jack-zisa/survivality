@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public class ShovelItemMixin {
     @Inject(method = "useOnBlock", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     private void survivality_depleteSnow(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir, World world, BlockPos blockPos, BlockState blockState, PlayerEntity playerEntity) {
-        if (!Survivality.CONFIG.shovelableSnow) return;
+        if (!Survivality.CONFIG.shovelableSnow.booleanValue()) return;
         if (blockState.getBlock() instanceof SnowBlock && context.getSide() == Direction.UP) {
             if (!world.isClient) {
                 int layers = blockState.get(Properties.LAYERS) - 1;

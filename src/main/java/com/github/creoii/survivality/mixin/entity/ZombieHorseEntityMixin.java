@@ -21,8 +21,8 @@ public abstract class ZombieHorseEntityMixin extends AbstractHorseEntity {
 
     @Inject(method = "interactMob", at = @At(value = "RETURN", ordinal = 0), cancellable = true)
     private void survivality_tameZombieHorse(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if (!Survivality.CONFIG.rideableZombieHorses) return;
+        if (!Survivality.CONFIG.rideableZombieHorses.booleanValue()) return;
         putPlayerOnBack(player);
-        cir.setReturnValue(ActionResult.success(world.isClient));
+        cir.setReturnValue(ActionResult.success(getWorld().isClient));
     }
 }

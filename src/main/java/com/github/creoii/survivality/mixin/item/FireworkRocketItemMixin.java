@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class FireworkRocketItemMixin {
     @Redirect(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;isFallFlying()Z"))
     private boolean survivality_useFireworksOnVehicles(PlayerEntity instance) {
-        if (!Survivality.CONFIG.rocketBoosting) return instance.isFallFlying();
+        if (!Survivality.CONFIG.rocketBoosting.booleanValue()) return instance.isFallFlying();
         return instance.isFallFlying() || (instance.getVehicle() != null && instance.getVehicle().getType().isIn(SurvivalityTags.BOOSTABLE_VEHICLES));
     }
 }
