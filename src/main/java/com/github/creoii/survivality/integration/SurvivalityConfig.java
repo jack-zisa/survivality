@@ -130,11 +130,11 @@ public class SurvivalityConfig {
                         .option(createFloatOption(
                                 Text.translatable("text.survivality.config.option.maxNightVisionModifier"),
                                 Text.translatable("text.survivality.config.option.maxNightVisionModifier.@Tooltip"),
-                                maxNightVisionModifier, .5f, 0, 25f, .5f))
+                                maxNightVisionModifier, 5f, 0, 25f, .5f))
                         .option(createIntegerOption(
                                 Text.translatable("text.survivality.config.option.maxMultishotLevel"),
                                 Text.translatable("text.survivality.config.option.maxMultishotLevel.@Tooltip"),
-                                maxMultishotLevel, 1, 1, 7, 4))
+                                maxMultishotLevel, 4, 1, 7, 1))
                         .option(createDoubleOption(
                                 Text.translatable("text.survivality.config.option.maxMinecartSpeed"),
                                 Text.translatable("text.survivality.config.option.maxMinecartSpeed.@Tooltip"),
