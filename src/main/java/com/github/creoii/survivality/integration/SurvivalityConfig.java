@@ -156,8 +156,8 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.rideableZombieHorses.@Tooltip"),
                                 rideableZombieHorses, true))
                         .option(createDoubleOption(
-                                Text.translatable("text.survivality.config.option.safeCactus"),
-                                Text.translatable("text.survivality.config.option.safeCactus.@Tooltip"),
+                                Text.translatable("text.survivality.config.option.playerXpModifier"),
+                                Text.translatable("text.survivality.config.option.playerXpModifier.@Tooltip"),
                                 playerXpModifier, 12d, 0d, 120d, 2d))
                         .option(createBooleanOption(
                                 Text.translatable("text.survivality.config.option.colorfulSheep"),
@@ -206,7 +206,7 @@ public class SurvivalityConfig {
                         .option(createIntegerOption(
                                 Text.translatable("text.survivality.config.option.spawnerRequiredPlayerRange"),
                                 Text.translatable("text.survivality.config.option.spawnerRequiredPlayerRange.@Tooltip"),
-                                spawnerRequiredPlayerRange, 32, 1, 128, 32))
+                                spawnerRequiredPlayerRange, 32, 0, 128, 8))
                         .option(createBooleanOption(
                                 Text.translatable("text.survivality.config.option.unrestrictedSpawners"),
                                 Text.translatable("text.survivality.config.option.unrestrictedSpawners.@Tooltip"),
