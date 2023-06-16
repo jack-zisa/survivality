@@ -23,6 +23,9 @@ public final class SurvivalityMixinPlugin implements IMixinConfigPlugin {
         if ("com.github.creoii.survivality.mixin.compat.LithiumEntityCollisionsMixin".equals(mixinClassName)) {
             return FabricLoader.getInstance().isModLoaded("lithium");
         }
+        if ("com.github.creoii.survivality.mixin.misc.AnvilScreenHandlerMixin".equals(mixinClassName)) {
+            return !FabricLoader.getInstance().isModLoaded("noexpensive");
+        }
         return true;
     }
 
