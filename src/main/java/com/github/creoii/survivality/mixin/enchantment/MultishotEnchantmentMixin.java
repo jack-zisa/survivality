@@ -1,6 +1,7 @@
 package com.github.creoii.survivality.mixin.enchantment;
 
 import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.MultishotEnchantment;
@@ -15,6 +16,7 @@ public abstract class MultishotEnchantmentMixin extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return Survivality.CONFIG.maxMultishotLevel.intValue();
+        int value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.maxMultishotLevel.intValue() : 4;
+        return value;
     }
 }

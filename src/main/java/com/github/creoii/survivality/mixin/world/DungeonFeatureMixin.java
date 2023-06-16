@@ -1,6 +1,7 @@
 package com.github.creoii.survivality.mixin.world;
 
 import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -24,7 +25,8 @@ public abstract class DungeonFeatureMixin {
 
     @Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/MobSpawnerBlockEntity;setEntityType(Lnet/minecraft/entity/EntityType;Lnet/minecraft/util/math/random/Random;)V", shift = At.Shift.AFTER))
     private void survivality_variantSpawners(FeatureContext<DefaultFeatureConfig> context, CallbackInfoReturnable<Boolean> cir) {
-        if (!Survivality.CONFIG.variantSpawners.booleanValue()) return;
+        boolean value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.variantSpawners.booleanValue() : true;
+        if (!value) return;
         BlockPos blockPos = context.getOrigin();
         Random random = context.getRandom();
         StructureWorldAccess structureWorldAccess = context.getWorld();

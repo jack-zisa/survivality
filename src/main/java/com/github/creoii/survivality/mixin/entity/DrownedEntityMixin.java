@@ -1,6 +1,7 @@
 package com.github.creoii.survivality.mixin.entity;
 
 import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -22,6 +23,7 @@ public abstract class DrownedEntityMixin extends ZombieEntity implements RangedA
 
     @Inject(method = "initEquipment", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/DrownedEntity;equipStack(Lnet/minecraft/entity/EquipmentSlot;Lnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 0))
     private void survivality_moreTridents(Random random, LocalDifficulty localDifficulty, CallbackInfo ci) {
-        setEquipmentDropChance(EquipmentSlot.MAINHAND, Survivality.CONFIG.tridentDropRate.floatValue());
+        float value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.tridentDropRate.floatValue() : .15f;
+        setEquipmentDropChance(EquipmentSlot.MAINHAND, value);
     }
 }

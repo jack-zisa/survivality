@@ -1,6 +1,7 @@
 package com.github.creoii.survivality.mixin.item;
 
 import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SnowBlock;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,7 +23,8 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public class ShovelItemMixin {
     @Inject(method = "useOnBlock", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     private void survivality_depleteSnow(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir, World world, BlockPos blockPos, BlockState blockState, PlayerEntity playerEntity) {
-        if (!Survivality.CONFIG.shovelableSnow.booleanValue()) return;
+        boolean value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.shovelableSnow.booleanValue() : true;
+        if (!value) return;
         if (blockState.getBlock() instanceof SnowBlock && context.getSide() == Direction.UP) {
             if (!world.isClient) {
                 int layers = blockState.get(Properties.LAYERS) - 1;

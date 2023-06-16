@@ -1,6 +1,7 @@
 package com.github.creoii.survivality.mixin.world;
 
 import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import com.google.common.collect.Lists;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
@@ -20,7 +21,8 @@ public class MultiNoiseSamplerMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void survivality_randomSpawnBiomes(DensityFunction densityFunction, DensityFunction densityFunction2, DensityFunction densityFunction3, DensityFunction densityFunction4, DensityFunction densityFunction5, DensityFunction densityFunction6, List list, CallbackInfo ci) {
-        if (!Survivality.CONFIG.randomWorldStartBiome.booleanValue()) return;
+        boolean value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.randomWorldStartBiome.booleanValue() : true;
+        if (!value) return;
         spawnTarget = Lists.newArrayList(MultiNoiseUtil.createNoiseHypercube(MultiNoiseUtil.ParameterRange.of(-1f, 1f), MultiNoiseUtil.ParameterRange.of(-1f, 1f), MultiNoiseUtil.ParameterRange.of(-1f, 1f), MultiNoiseUtil.ParameterRange.of(-1f, 1f), MultiNoiseUtil.ParameterRange.of(-1f, 1f), MultiNoiseUtil.ParameterRange.of(-1f, 1f), 0f));
     }
 }

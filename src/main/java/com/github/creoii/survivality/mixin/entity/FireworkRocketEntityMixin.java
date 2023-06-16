@@ -1,6 +1,7 @@
 package com.github.creoii.survivality.mixin.entity;
 
 import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import com.github.creoii.survivality.util.SurvivalityTags;
 import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.entity.Entity;
@@ -17,7 +18,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class FireworkRocketEntityMixin {
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isFallFlying()Z"))
     private boolean survivality_rocketBoosting(LivingEntity instance) {
-        if (!Survivality.CONFIG.rocketBoosting.booleanValue()) return instance.isFallFlying();
+        boolean value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.rocketBoosting.booleanValue() : true;
+        if (!value) return instance.isFallFlying();
         Entity vehicle = instance.getVehicle();
         if ((vehicle != null && vehicle.getType().isIn(SurvivalityTags.BOOSTABLE_VEHICLES))) {
             if (vehicle instanceof AbstractMinecartEntity minecartEntity) {

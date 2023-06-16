@@ -1,6 +1,7 @@
 package com.github.creoii.survivality.mixin.entity;
 
 import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,7 +24,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "getXpToDrop", at = @At("HEAD"), cancellable = true)
     private void survivality_dropMoreXp(CallbackInfoReturnable<Integer> cir) {
         if (!getWorld().getGameRules().getBoolean(GameRules.KEEP_INVENTORY) && !isSpectator()) {
-            cir.setReturnValue((int)(experienceLevel * Survivality.CONFIG.playerXpModifier.doubleValue()));
+            double value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.playerXpModifier.doubleValue() : 12d;
+            cir.setReturnValue((int)(experienceLevel * value));
         }
     }
 }

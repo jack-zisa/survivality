@@ -1,6 +1,7 @@
 package com.github.creoii.survivality.mixin.block;
 
 import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import com.github.creoii.survivality.util.SurvivalityTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PointedDripstoneBlock;
@@ -19,7 +20,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PointedDripstoneBlockMixin {
     @Inject(method = "onProjectileHit", at = @At("TAIL"), cancellable = true)
     private void survivality_unstableDripstone(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile, CallbackInfo ci) {
-        if (!Survivality.CONFIG.unstableDripstone.booleanValue()) return;
+        boolean value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.unstableDripstone.booleanValue() : true;
+        if (!value) return;
         BlockPos hitPos = hit.getBlockPos();
         if (!world.isClient && projectile.canModifyAt(world, hitPos) && projectile.getType().isIn(SurvivalityTags.BREAK_DRIPSTONE) && projectile.getVelocity().length() > .6d) {
             world.breakBlock(hitPos, true);
@@ -29,7 +31,8 @@ public class PointedDripstoneBlockMixin {
 
     @Inject(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/PointedDripstoneBlock;tryGrow(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/random/Random;)V"), cancellable = true)
     private void survivality_dripstoneRandomlyFall(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (Survivality.CONFIG.unstableDripstone.booleanValue() && random.nextInt(3) == 0 && !world.isClient) {
+        boolean value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.unstableDripstone.booleanValue() : true;
+        if (value && random.nextInt(3) == 0 && !world.isClient) {
             world.breakBlock(pos, true);
             ci.cancel();
         }

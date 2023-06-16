@@ -1,6 +1,7 @@
 package com.github.creoii.survivality.mixin.entity;
 
 import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EyeOfEnderEntity;
@@ -23,6 +24,7 @@ public abstract class EyeOfEnderEntityMixin extends Entity implements FlyingItem
 
     @Inject(method = "initTargetPos", at = @At("TAIL"))
     private void survivality_dontBreakEyeOfEnder(BlockPos pos, CallbackInfo ci) {
-        dropsItem = random.nextFloat() < Survivality.CONFIG.eyeOfEnderBreakChance.floatValue();
+        float value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.eyeOfEnderBreakChance.floatValue() : 0f;
+        dropsItem = random.nextFloat() < value;
     }
 }

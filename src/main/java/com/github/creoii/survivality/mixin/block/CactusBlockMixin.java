@@ -1,6 +1,7 @@
 package com.github.creoii.survivality.mixin.block;
 
 import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CactusBlock;
 import net.minecraft.entity.Entity;
@@ -19,13 +20,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class CactusBlockMixin {
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
     private void survivality_cactiDontBreakCacti(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
-        if (Survivality.CONFIG.safeCactus.booleanValue() && entity instanceof ItemEntity itemEntity && itemEntity.getStack().isOf(Items.CACTUS)) {
+        boolean value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.safeCactus.booleanValue() : true;
+        if (value && entity instanceof ItemEntity itemEntity && itemEntity.getStack().isOf(Items.CACTUS)) {
             ci.cancel();
         }
     }
 
     @ModifyConstant(method = "randomTick", constant = @Constant(intValue = 3))
     private int survivality_increaseCactusHeight(int constant) {
-        return Survivality.CONFIG.cactusGrowHeight.intValue();
+        int value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.cactusGrowHeight.intValue() : 5;
+        return value;
     }
 }

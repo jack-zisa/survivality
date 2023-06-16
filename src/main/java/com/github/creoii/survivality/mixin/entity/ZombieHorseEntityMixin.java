@@ -1,6 +1,7 @@
 package com.github.creoii.survivality.mixin.entity;
 
 import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.ZombieHorseEntity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
@@ -21,7 +22,8 @@ public abstract class ZombieHorseEntityMixin extends AbstractHorseEntity {
 
     @Inject(method = "interactMob", at = @At(value = "RETURN", ordinal = 0), cancellable = true)
     private void survivality_tameZombieHorse(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if (!Survivality.CONFIG.rideableZombieHorses.booleanValue()) return;
+        boolean value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.rideableZombieHorses.booleanValue() : true;
+        if (!value) return;
         putPlayerOnBack(player);
         cir.setReturnValue(ActionResult.success(getWorld().isClient));
     }

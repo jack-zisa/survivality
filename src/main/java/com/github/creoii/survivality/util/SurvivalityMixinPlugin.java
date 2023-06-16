@@ -28,7 +28,6 @@ public final class SurvivalityMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
-
     }
 
     @Override
