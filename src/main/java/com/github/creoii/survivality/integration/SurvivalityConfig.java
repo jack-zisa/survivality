@@ -1,5 +1,9 @@
 package com.github.creoii.survivality.integration;
 
+import com.google.common.collect.ImmutableList;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
@@ -9,13 +13,25 @@ import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import dev.isxander.yacl3.config.ConfigEntry;
+import dev.isxander.yacl3.config.GsonConfigInstance;
+import dev.isxander.yacl3.gui.YACLScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.mutable.MutableDouble;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.apache.commons.lang3.mutable.MutableInt;
+import org.jetbrains.annotations.Nullable;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.function.Consumer;
 
 public class SurvivalityConfig {
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Path configPath = Path.of("config", "survivality.json");
+    private boolean preloaded = false;
+
     @ConfigEntry
     public MutableBoolean safeCactus = new MutableBoolean(true);
 
@@ -107,7 +123,7 @@ public class SurvivalityConfig {
     public MutableInt sugarCaneGrowHeight = new MutableInt(5);
 
     public YetAnotherConfigLib getYACL() {
-        return YetAnotherConfigLib.createBuilder()
+        YetAnotherConfigLib config = YetAnotherConfigLib.createBuilder()
                 .title(Text.translatable("text.survivality.config.title"))
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("text.survivality.config.general"))
@@ -235,7 +251,98 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.unboundEnchant.@Tooltip"),
                                 unboundEnchant, true))
                         .build())
+                .save(this::save)
                 .build();
+        return config;
+    }
+
+    public void preload() {
+        if (preloaded) return;
+        preloaded = true;
+
+        if (!Files.exists(configPath))
+            return;
+
+        try {
+            String jsonString = Files.readString(configPath);
+            JsonObject json = gson.fromJson(jsonString, JsonObject.class);
+
+            safeCactus.setValue(json.get("safe_cactus").getAsBoolean());
+            featheryFallingBoots.setValue(json.get("feathery_falling_boots").getAsBoolean());
+            unstableDripstone.setValue(json.get("unstable_dripstone").getAsBoolean());
+            betterNightVision.setValue(json.get("better_night_vision").getAsBoolean());
+            maxNightVisionModifier.setValue(json.get("max_night_vision_modifier").getAsFloat());
+            maxMultishotLevel.setValue(json.get("max_multishot_level").getAsInt());
+            maxMinecartSpeed.setValue(json.get("max_minecart_speed").getAsDouble());
+            tridentDropRate.setValue(json.get("trident_drop_rate").getAsFloat());
+            eyeOfEnderBreakChance.setValue(json.get("eye_of_ender_break_chance").getAsFloat());
+            zombieHorseTransmutation.setValue(json.get("zombie_horse_transmutation").getAsBoolean());
+            rideableZombieHorses.setValue(json.get("rideable_zombie_horses").getAsBoolean());
+            playerXpModifier.setValue(json.get("player_xp_modifier").getAsDouble());
+            colorfulSheep.setValue(json.get("colorful_sheep").getAsBoolean());
+            maxSlimeSize.setValue(json.get("max_slime_size").getAsInt());
+            maxMagmaCubeSize.setValue(json.get("max_magma_cube_size").getAsInt());
+            moreSnacks.setValue(json.get("more_snacks").getAsBoolean());
+            shovelableSnow.setValue(json.get("shovelable_snow").getAsBoolean());
+            variantSpawners.setValue(json.get("variant_spawners").getAsBoolean());
+            randomWorldStartTime.setValue(json.get("random_world_start_time").getAsBoolean());
+            randomWorldStartWeather.setValue(json.get("random_world_start_weather").getAsBoolean());
+            randomWorldStartSpawnPos.setValue(json.get("random_world_start_spawn_pos").getAsBoolean());
+            randomWorldStartBiome.setValue(json.get("random_world_start_biome").getAsBoolean());
+            rocketBoosting.setValue(json.get("rocket_boosting").getAsBoolean());
+            spawnerRequiredPlayerRange.setValue(json.get("spawner_required_player_range").getAsInt());
+            unrestrictedSpawners.setValue(json.get("unrestricted_spawners").getAsBoolean());
+            polarBearCavalryChance.setValue(json.get("polar_bear_cavalry_chance").getAsFloat());
+            boatsIgnoreWaterlilies.setValue(json.get("boats_ignore_waterlilies").getAsBoolean());
+            unboundEnchant.setValue(json.get("unbound_enchant").getAsBoolean());
+            cactusGrowHeight.setValue(json.get("cactus_grow_height").getAsInt());
+            sugarCaneGrowHeight.setValue(json.get("sugar_cane_grow_height").getAsInt());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void save() {
+        try {
+            Files.deleteIfExists(configPath);
+
+            JsonObject json = new JsonObject();
+            json.addProperty("safe_cactus", safeCactus.booleanValue());
+            json.addProperty("feathery_falling_boots", featheryFallingBoots.booleanValue());
+            json.addProperty("unstable_dripstone", unstableDripstone.booleanValue());
+            json.addProperty("better_night_vision", betterNightVision.booleanValue());
+            json.addProperty("max_night_vision_modifier", maxNightVisionModifier.floatValue());
+            json.addProperty("max_multishot_level", maxMultishotLevel.intValue());
+            json.addProperty("max_minecart_speed", maxMinecartSpeed.doubleValue());
+            json.addProperty("trident_drop_rate", tridentDropRate.floatValue());
+            json.addProperty("eye_of_ender_break_chance", eyeOfEnderBreakChance.floatValue());
+            json.addProperty("zombie_horse_transmutation", zombieHorseTransmutation.booleanValue());
+            json.addProperty("rideable_zombie_horses", rideableZombieHorses.booleanValue());
+            json.addProperty("player_xp_modifier", playerXpModifier.doubleValue());
+            json.addProperty("colorful_sheep", colorfulSheep.booleanValue());
+            json.addProperty("max_slime_size", maxSlimeSize.intValue());
+            json.addProperty("max_magma_cube_size", maxMagmaCubeSize.intValue());
+            json.addProperty("more_snacks", moreSnacks.booleanValue());
+            json.addProperty("shovelable_snow", shovelableSnow.booleanValue());
+            json.addProperty("variant_spawners", variantSpawners.booleanValue());
+            json.addProperty("random_world_start_time", randomWorldStartTime.booleanValue());
+            json.addProperty("random_world_start_weather", randomWorldStartWeather.booleanValue());
+            json.addProperty("random_world_start_spawn_pos", randomWorldStartSpawnPos.booleanValue());
+            json.addProperty("random_world_start_biome", randomWorldStartBiome.booleanValue());
+            json.addProperty("rocket_boosting", rocketBoosting.booleanValue());
+            json.addProperty("spawner_required_player_range", spawnerRequiredPlayerRange.intValue());
+            json.addProperty("unrestricted_spawners", unrestrictedSpawners.booleanValue());
+            json.addProperty("polar_bear_cavalry_chance", polarBearCavalryChance.floatValue());
+            json.addProperty("boats_ignore_waterlilies", boatsIgnoreWaterlilies.booleanValue());
+            json.addProperty("unbound_enchant", unboundEnchant.booleanValue());
+            json.addProperty("cactus_grow_height", cactusGrowHeight.intValue());
+            json.addProperty("sugar_cane_grow_height", sugarCaneGrowHeight.intValue());
+
+            Files.createFile(configPath);
+            Files.writeString(configPath, gson.toJson(json));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressWarnings("deprecation")
@@ -262,10 +369,6 @@ public class SurvivalityConfig {
                         .range(min, max)
                         .step(interval))
                 .build();
-    }
-
-    public Option<Integer> createIntegerOption(Text name, Text description, MutableInt option, int def, int min, int max) {
-        return createIntegerOption(name, description, option, def, min, max, 1);
     }
 
     @SuppressWarnings("deprecation")
