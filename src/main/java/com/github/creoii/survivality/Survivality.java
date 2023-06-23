@@ -2,7 +2,9 @@ package com.github.creoii.survivality;
 
 import com.github.creoii.survivality.integration.ModMenuIntegration;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.item.Items;
 
 /**
  *  To Test:
@@ -20,5 +22,7 @@ public class Survivality implements ModInitializer {
 		if (CONFIG_AVAILABLE && ModMenuIntegration.CONFIG != null) {
 			ModMenuIntegration.CONFIG.preload();
 		}
+
+		FuelRegistry.INSTANCE.add(Items.TNT, 50);
 	}
 }

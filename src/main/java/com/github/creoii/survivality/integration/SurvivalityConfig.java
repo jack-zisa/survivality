@@ -1,6 +1,5 @@
 package com.github.creoii.survivality.integration;
 
-import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -13,19 +12,14 @@ import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import dev.isxander.yacl3.config.ConfigEntry;
-import dev.isxander.yacl3.config.GsonConfigInstance;
-import dev.isxander.yacl3.gui.YACLScreen;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.mutable.MutableDouble;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.apache.commons.lang3.mutable.MutableInt;
-import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.function.Consumer;
 
 public class SurvivalityConfig {
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -121,6 +115,12 @@ public class SurvivalityConfig {
 
     @ConfigEntry
     public MutableInt sugarCaneGrowHeight = new MutableInt(5);
+
+    @ConfigEntry
+    public MutableBoolean fertilizableDirt = new MutableBoolean(true);
+
+    @ConfigEntry
+    public MutableFloat tntFuelExplosionChance = new MutableFloat(.1f);
 
     public YetAnotherConfigLib getYACL() {
         YetAnotherConfigLib config = YetAnotherConfigLib.createBuilder()
@@ -243,6 +243,14 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.sugarCaneGrowHeight"),
                                 Text.translatable("text.survivality.config.option.sugarCaneGrowHeight.@Tooltip"),
                                 sugarCaneGrowHeight, 5, 0, 384, 1))
+                        .option(createBooleanOption(
+                                Text.translatable("text.survivality.config.option.fertilizableDirt"),
+                                Text.translatable("text.survivality.config.option.fertilizableDirt.@Tooltip"),
+                                fertilizableDirt, true))
+                        .option(createFloatOption(
+                                Text.translatable("text.survivality.config.option.tntFuelExplosionChance"),
+                                Text.translatable("text.survivality.config.option.tntFuelExplosionChance.@Tooltip"),
+                                tntFuelExplosionChance, .1f, 0f, 1f, .05f))
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("text.survivality.config.creative"))
@@ -297,6 +305,8 @@ public class SurvivalityConfig {
             unboundEnchant.setValue(json.get("unbound_enchant").getAsBoolean());
             cactusGrowHeight.setValue(json.get("cactus_grow_height").getAsInt());
             sugarCaneGrowHeight.setValue(json.get("sugar_cane_grow_height").getAsInt());
+            fertilizableDirt.setValue(json.get("fertilize_dirt").getAsBoolean());
+            tntFuelExplosionChance.setValue(json.get("tnt_fuel_explosion_chance").getAsFloat());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -337,6 +347,8 @@ public class SurvivalityConfig {
             json.addProperty("unbound_enchant", unboundEnchant.booleanValue());
             json.addProperty("cactus_grow_height", cactusGrowHeight.intValue());
             json.addProperty("sugar_cane_grow_height", sugarCaneGrowHeight.intValue());
+            json.addProperty("fertilize_dirt", fertilizableDirt.booleanValue());
+            json.addProperty("tnt_fuel_explosion_chance", tntFuelExplosionChance.floatValue());
 
             Files.createFile(configPath);
             Files.writeString(configPath, gson.toJson(json));

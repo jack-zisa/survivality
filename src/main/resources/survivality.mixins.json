@@ -12,6 +12,7 @@
     "client.GameRendererMixin"
   ],
   "mixins": [
+    "block.AbstractFurnaceBlockEntityMixin",
     "block.CactusBlockMixin",
     "block.FarmlandBlockMixin",
     "block.PointedDripstoneBlockMixin",
@@ -30,6 +31,7 @@
     "entity.SlimeEntityMixin",
     "entity.StrayEntityMixin",
     "entity.ZombieHorseEntityMixin",
+    "item.BoneMealItemMixin",
     "item.CrossbowItemMixin",
     "item.FireworkRocketItemMixin",
     "item.ItemMixin",
