@@ -31,6 +31,7 @@ dependencies {
     modCompileOnly "maven.modrinth:lithium:${project.lithium_version}"
     modApi "com.terraformersmc:modmenu:${project.mod_menu_version}"
     modApi "dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}"
+    modApi "maven.modrinth:creo-lib:${project.creo_lib_version}"
 }
 
 java {

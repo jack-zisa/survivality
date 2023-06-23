@@ -1,11 +1,14 @@
 package com.github.creoii.survivality.mixin.compat;
 
+import com.github.creoii.creolib.core.util.EntityBlockCollisionSpliterator;
 import com.github.creoii.survivality.Survivality;
 import com.github.creoii.survivality.integration.ModMenuIntegration;
-import com.github.creoii.survivality.util.BoatBlockCollisionSpliterator;
 import me.jellysquid.mods.lithium.common.entity.LithiumEntityCollisions;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
@@ -22,6 +25,6 @@ public class LithiumEntityCollisionsMixin {
     private static void survivality_lithiumCompatBoatsIgnoreWaterlilies(World world, Entity entity, Box box, CallbackInfoReturnable<List<VoxelShape>> cir) {
         boolean value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.boatsIgnoreWaterlilies.booleanValue() : true;
         if (entity instanceof BoatEntity && value)
-            cir.setReturnValue(new BoatBlockCollisionSpliterator(world, entity, box).collectAll());
+            cir.setReturnValue(new EntityBlockCollisionSpliterator(world, entity, box, RegistryEntryList.of(RegistryEntry.of(Blocks.LILY_PAD))).collectAll());
     }
 }
