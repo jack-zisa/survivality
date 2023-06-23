@@ -8,3 +8,4 @@ accessible field net/minecraft/client/gui/screen/ingame/AnvilScreen TOO_EXPENSIV
 accessible field net/minecraft/entity/vehicle/BoatEntity location Lnet/minecraft/entity/vehicle/BoatEntity$Location;
 accessible field net/minecraft/world/MobSpawnerLogic requiredPlayerRange I
 accessible field net/minecraft/block/entity/AbstractFurnaceBlockEntity inventory Lnet/minecraft/util/collection/DefaultedList;
+accessible field net/minecraft/block/entity/AbstractFurnaceBlockEntity cookTime I

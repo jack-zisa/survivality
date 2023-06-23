@@ -120,7 +120,7 @@ public class SurvivalityConfig {
     public MutableBoolean fertilizableDirt = new MutableBoolean(true);
 
     @ConfigEntry
-    public MutableFloat tntFuelExplosionChance = new MutableFloat(.1f);
+    public MutableFloat tntFuelExplosionChance = new MutableFloat(.25f);
 
     public YetAnotherConfigLib getYACL() {
         YetAnotherConfigLib config = YetAnotherConfigLib.createBuilder()
@@ -250,7 +250,7 @@ public class SurvivalityConfig {
                         .option(createFloatOption(
                                 Text.translatable("text.survivality.config.option.tntFuelExplosionChance"),
                                 Text.translatable("text.survivality.config.option.tntFuelExplosionChance.@Tooltip"),
-                                tntFuelExplosionChance, .1f, 0f, 1f, .05f))
+                                tntFuelExplosionChance, .25f, 0f, 1f, .05f))
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("text.survivality.config.creative"))
