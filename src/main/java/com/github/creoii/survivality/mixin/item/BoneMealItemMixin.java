@@ -1,5 +1,7 @@
 package com.github.creoii.survivality.mixin.item;
 
+import com.github.creoii.survivality.Survivality;
+import com.github.creoii.survivality.integration.ModMenuIntegration;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BoneMealItem;
@@ -18,6 +20,9 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public class BoneMealItemMixin {
     @Inject(method = "useOnBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isSideSolidFullSquare(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)Z"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     private void survivality_fertilizeDirt(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir, World world, BlockPos blockPos, BlockPos blockPos2, BlockState blockState) {
+        boolean value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.fertilizableDirt.booleanValue() : true;
+        if (!value) return;
+
         if (blockState.isOf(Blocks.DIRT)) {
             boolean nextToGrass = false;
 
