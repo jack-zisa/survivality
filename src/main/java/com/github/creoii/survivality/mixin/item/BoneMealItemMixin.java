@@ -2,6 +2,7 @@ package com.github.creoii.survivality.mixin.item;
 
 import com.github.creoii.survivality.Survivality;
 import com.github.creoii.survivality.integration.ModMenuIntegration;
+import com.github.creoii.survivality.util.SurvivalityTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BoneMealItem;
@@ -27,7 +28,7 @@ public class BoneMealItemMixin {
             boolean nextToGrass = false;
 
             for (Direction direction : Direction.Type.HORIZONTAL) {
-                if (world.getBlockState(blockPos.offset(direction)).isOf(Blocks.GRASS_BLOCK)) {
+                if (world.getBlockState(blockPos.offset(direction)).isIn(SurvivalityTags.DIRT_FERTILIZABLE_GRASS)) {
                     nextToGrass = true;
                     break;
                 }

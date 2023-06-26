@@ -123,7 +123,7 @@ public class SurvivalityConfig {
     public MutableFloat tntFuelExplosionChance = new MutableFloat(.25f);
 
     @ConfigEntry
-    public MutableBoolean weatherFog = new MutableBoolean(true);
+    public MutableBoolean snowFog = new MutableBoolean(true);
 
     public YetAnotherConfigLib getYACL() {
         YetAnotherConfigLib config = YetAnotherConfigLib.createBuilder()
@@ -255,9 +255,9 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.tntFuelExplosionChance.@Tooltip"),
                                 tntFuelExplosionChance, .25f, 0f, 1f, .05f))
                         .option(createBooleanOption(
-                                Text.translatable("text.survivality.config.option.weatherFog"),
-                                Text.translatable("text.survivality.config.option.weatherFog.@Tooltip"),
-                                weatherFog, true))
+                                Text.translatable("text.survivality.config.option.snowFog"),
+                                Text.translatable("text.survivality.config.option.snowFog.@Tooltip"),
+                                snowFog, true))
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("text.survivality.config.creative"))
@@ -314,7 +314,7 @@ public class SurvivalityConfig {
             sugarCaneGrowHeight.setValue(json.get("sugar_cane_grow_height").getAsInt());
             fertilizableDirt.setValue(json.get("fertilize_dirt").getAsBoolean());
             tntFuelExplosionChance.setValue(json.get("tnt_fuel_explosion_chance").getAsFloat());
-            weatherFog.setValue(json.get("weather_fog").getAsBoolean());
+            snowFog.setValue(json.get("snow_fog").getAsBoolean());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -357,7 +357,7 @@ public class SurvivalityConfig {
             json.addProperty("sugar_cane_grow_height", sugarCaneGrowHeight.intValue());
             json.addProperty("fertilize_dirt", fertilizableDirt.booleanValue());
             json.addProperty("tnt_fuel_explosion_chance", tntFuelExplosionChance.floatValue());
-            json.addProperty("weather_fog", weatherFog.booleanValue());
+            json.addProperty("snow_fog", snowFog.booleanValue());
 
             Files.createFile(configPath);
             Files.writeString(configPath, gson.toJson(json));

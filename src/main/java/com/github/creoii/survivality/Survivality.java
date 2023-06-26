@@ -24,37 +24,22 @@ public class Survivality implements ModInitializer {
 		}
 
 		FuelRegistry.INSTANCE.add(Items.TNT, 50);
+
 		FogModifier.register(FogModifier.createColored(
 				Survivality::snowFogPredicate,
-				fogFunction -> fogFunction.viewDistance() * .05f,
-				fogFunction -> Math.min(fogFunction.viewDistance(), 192f),
-				.05f,
+				fogFunction -> 4f,
+				fogFunction -> 96f,
+				.01f,
 				FogShape.SPHERE,
-				new Vec3d(255d, 255d, 255d)
-		));
-		FogModifier.register(FogModifier.createColored(
-				Survivality::rainFogPredicate,
-				fogFunction -> fogFunction.viewDistance() * .1f,
-				fogFunction -> Math.min(fogFunction.viewDistance(), 192f),
-				.05f,
-				FogShape.SPHERE,
-				new Vec3d(64d, 64d, 64d)
+				new Vec3d(192d, 192d, 192d)
 		));
 	}
 
 	public static boolean snowFogPredicate(FogFunction fogFunction) {
-		if (CONFIG_AVAILABLE && !ModMenuIntegration.CONFIG.weatherFog.booleanValue()) return false;
+		if (CONFIG_AVAILABLE && !ModMenuIntegration.CONFIG.snowFog.booleanValue()) return false;
 		RegistryEntry<Biome> biomeEntry = fogFunction.biomeEntry();
 		if (biomeEntry != null && biomeEntry.hasKeyAndValue()) {
-			return fogFunction.world().isRaining() && fogFunction.world().getBiome(fogFunction.focusedEntity().getBlockPos()).value().isCold(fogFunction.focusedEntity().getBlockPos()) && biomeEntry.isIn(BiomeTags.IS_MOUNTAIN);
-		} return false;
-	}
-
-	public static boolean rainFogPredicate(FogFunction fogFunction) {
-		if (CONFIG_AVAILABLE && !ModMenuIntegration.CONFIG.weatherFog.booleanValue()) return false;
-		RegistryEntry<Biome> biomeEntry = fogFunction.biomeEntry();
-		if (biomeEntry != null && biomeEntry.hasKeyAndValue()) {
-			return fogFunction.world().isRaining() && !fogFunction.world().getBiome(fogFunction.focusedEntity().getBlockPos()).value().isCold(fogFunction.focusedEntity().getBlockPos()) && biomeEntry.isIn(BiomeTags.IS_MOUNTAIN);
+			return fogFunction.world().isRaining() && biomeEntry.isIn(BiomeTags.IS_MOUNTAIN) && fogFunction.world().getBiome(fogFunction.focusedEntity().getBlockPos()).value().isCold(fogFunction.focusedEntity().getBlockPos());
 		} return false;
 	}
 }

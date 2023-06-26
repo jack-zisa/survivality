@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:grass",
+    {
+      "required": false,
+      "id": "great_big_world:grassy_lavarock"
+    }
+  ]
+}

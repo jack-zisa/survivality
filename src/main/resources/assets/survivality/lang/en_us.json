@@ -69,6 +69,8 @@
   "text.survivality.config.option.fertilizableDirt.@Tooltip": "Convert Dirt into Grass via Bone Meal",
   "text.survivality.config.option.tntFuelExplosionChance": "Tnt Fuel Explosion Chance",
   "text.survivality.config.option.tntFuelExplosionChance.@Tooltip": "Chance for Tnt to explode a Furnace when cooking",
+  "text.survivality.config.option.snowFog": "Snow Fog",
+  "text.survivality.config.option.snowFog.@Tooltip": "Display fog when snowing in mountain biomes",
 
   "text.survivality.config.option.unboundEnchant": "Unbound /enchant",
   "text.survivality.config.option.unboundEnchant.@Tooltip": "/enchant allows any level of enchantment"
