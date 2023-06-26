@@ -3,6 +3,7 @@ package com.github.creoii.survivality;
 import com.github.creoii.creolib.api.util.fog.FogFunction;
 import com.github.creoii.creolib.api.util.fog.FogModifier;
 import com.github.creoii.survivality.integration.ModMenuIntegration;
+import com.github.creoii.survivality.util.SurvivalityTags;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
@@ -39,7 +40,7 @@ public class Survivality implements ModInitializer {
 		if (CONFIG_AVAILABLE && !ModMenuIntegration.CONFIG.snowFog.booleanValue()) return false;
 		RegistryEntry<Biome> biomeEntry = fogFunction.biomeEntry();
 		if (biomeEntry != null && biomeEntry.hasKeyAndValue()) {
-			return fogFunction.world().isRaining() && biomeEntry.isIn(BiomeTags.IS_MOUNTAIN) && fogFunction.world().getBiome(fogFunction.focusedEntity().getBlockPos()).value().isCold(fogFunction.focusedEntity().getBlockPos());
+			return fogFunction.world().isRaining() && biomeEntry.isIn(SurvivalityTags.SNOW_FOG_BIOMES);
 		} return false;
 	}
 }
