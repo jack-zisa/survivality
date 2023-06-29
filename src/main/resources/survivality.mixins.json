@@ -21,6 +21,7 @@
     "creative.command.EnchantCommandMixin",
     "enchantment.MultishotEnchantmentMixin",
     "entity.AbstractMinecraftEntityMixin",
+    "entity.CreeperEntityMixin",
     "entity.DrownedEntityMixin",
     "entity.EyeOfEnderEntityMixin",
     "entity.FireworkRocketEntityMixin",

@@ -71,6 +71,12 @@
   "text.survivality.config.option.tntFuelExplosionChance.@Tooltip": "Chance for Tnt to explode a Furnace when cooking",
   "text.survivality.config.option.snowFog": "Snow Fog",
   "text.survivality.config.option.snowFog.@Tooltip": "Display fog when snowing in mountain biomes",
+  "text.survivality.config.option.stackedPotions": "Stacked Potions",
+  "text.survivality.config.option.stackedPotions.@Tooltip": "Potions stack to 16",
+  "text.survivality.config.option.snowGolemSpawnWeight": "Snow Golem Spawn Weight",
+  "text.survivality.config.option.snowGolemSpawnWeight.@Tooltip": "Chance for Snow Golems to spawn",
+  "text.survivality.config.option.creeperChainExplosions": "Creeper Chain Explosions",
+  "text.survivality.config.option.creeperChainExplosions.@Tooltip": "Creepers explode when exploded by other creepers",
 
   "text.survivality.config.option.unboundEnchant": "Unbound /enchant",
   "text.survivality.config.option.unboundEnchant.@Tooltip": "/enchant allows any level of enchantment"

@@ -125,6 +125,15 @@ public class SurvivalityConfig {
     @ConfigEntry
     public MutableBoolean snowFog = new MutableBoolean(true);
 
+    @ConfigEntry
+    public MutableBoolean stackedPotions = new MutableBoolean(true);
+
+    @ConfigEntry
+    public MutableInt snowGolemSpawnWeight = new MutableInt(10);
+
+    @ConfigEntry
+    public MutableBoolean creeperChainExplosions = new MutableBoolean(true);
+
     public YetAnotherConfigLib getYACL() {
         YetAnotherConfigLib config = YetAnotherConfigLib.createBuilder()
                 .title(Text.translatable("text.survivality.config.title"))
@@ -258,6 +267,18 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.snowFog"),
                                 Text.translatable("text.survivality.config.option.snowFog.@Tooltip"),
                                 snowFog, true))
+                        .option(createBooleanOption(
+                                Text.translatable("text.survivality.config.option.stackedPotions"),
+                                Text.translatable("text.survivality.config.option.stackedPotions.@Tooltip"),
+                                stackedPotions, true))
+                        .option(createIntegerOption(
+                                Text.translatable("text.survivality.config.option.snowGolemSpawnWeight"),
+                                Text.translatable("text.survivality.config.option.snowGolemSpawnWeight.@Tooltip"),
+                                maxMagmaCubeSize, 10, -1, 100, 1))
+                        .option(createBooleanOption(
+                                Text.translatable("text.survivality.config.option.creeperChainExplosions"),
+                                Text.translatable("text.survivality.config.option.creeperChainExplosions.@Tooltip"),
+                                creeperChainExplosions, true))
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("text.survivality.config.creative"))
@@ -315,6 +336,9 @@ public class SurvivalityConfig {
             fertilizableDirt.setValue(json.get("fertilize_dirt").getAsBoolean());
             tntFuelExplosionChance.setValue(json.get("tnt_fuel_explosion_chance").getAsFloat());
             snowFog.setValue(json.get("snow_fog").getAsBoolean());
+            stackedPotions.setValue(json.get("stacked_potions").getAsBoolean());
+            snowGolemSpawnWeight.setValue(json.get("snow_golem_spawn_weight").getAsInt());
+            creeperChainExplosions.setValue(json.get("creeper_chain_explosions").getAsBoolean());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -358,6 +382,9 @@ public class SurvivalityConfig {
             json.addProperty("fertilize_dirt", fertilizableDirt.booleanValue());
             json.addProperty("tnt_fuel_explosion_chance", tntFuelExplosionChance.floatValue());
             json.addProperty("snow_fog", snowFog.booleanValue());
+            json.addProperty("stacked_potions", stackedPotions.booleanValue());
+            json.addProperty("snow_golem_spawn_weight", snowGolemSpawnWeight.intValue());
+            json.addProperty("creeper_chain_explosions", creeperChainExplosions.booleanValue());
 
             Files.createFile(configPath);
             Files.writeString(configPath, gson.toJson(json));
