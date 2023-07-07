@@ -1,6 +1,5 @@
 package com.github.creoii.survivality;
 
-import com.github.creoii.creolib.api.event.entity.EntitySpawnCallback;
 import com.github.creoii.creolib.api.util.block.BlockUtil;
 import com.github.creoii.creolib.api.util.entity.EntityUtil;
 import com.github.creoii.creolib.api.util.fog.FogFunction;
@@ -16,12 +15,16 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.render.FogShape;
-import net.minecraft.data.server.loottable.vanilla.VanillaBlockLootTableGenerator;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.condition.RandomChanceLootCondition;
+import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.SetPotionLootFunction;
+import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.potion.Potions;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -42,6 +45,7 @@ public class Survivality implements ModInitializer {
 		boolean snowmenSpawn = true;
 		boolean harderBuddingAmethyst = true;
 		boolean slotMachineGildedBlackstone = true;
+		boolean structurePotions = true;
 		if (CONFIG_AVAILABLE && ModMenuIntegration.CONFIG != null) {
 			ModMenuIntegration.CONFIG.preload();
 
@@ -57,6 +61,8 @@ public class Survivality implements ModInitializer {
 				harderBuddingAmethyst = false;
 			if (!ModMenuIntegration.CONFIG.slotMachineGildedBlackstone.booleanValue())
 				slotMachineGildedBlackstone = false;
+			if (!ModMenuIntegration.CONFIG.structurePotions.booleanValue())
+				structurePotions = false;
 		}
 
 		if (tntFuel)
@@ -89,7 +95,10 @@ public class Survivality implements ModInitializer {
 			BlockUtil.setHardness(Blocks.BUDDING_AMETHYST, 4.5f);
 
 		if (slotMachineGildedBlackstone)
-			registerSlotMachineGildedBlackstoneLootTable();
+			replaceGildedBlackstoneLootTable();
+
+		if (structurePotions)
+			modifyStructurePotionLootTable();
 	}
 
 	public static boolean canSnowGolemSpawn(EntityType<? extends MobEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
@@ -106,12 +115,45 @@ public class Survivality implements ModInitializer {
 		} return false;
 	}
 
-	private static void registerSlotMachineGildedBlackstoneLootTable() {
+	private static void replaceGildedBlackstoneLootTable() {
 		LootTableEvents.REPLACE.register((resourceManager, lootManager, id, original, source) -> {
 			if (id.equals(new Identifier("minecraft", "blocks/gilded_blackstone"))) {
 				return lootManager.getLootTable(new Identifier(NAMESPACE, "blocks/slot_machine_gilded_blackstone"));
 			}
 			return original;
+		});
+	}
+
+	private static void modifyStructurePotionLootTable() {
+		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+			if (id.equals(LootTables.ABANDONED_MINESHAFT_CHEST)) {
+				tableBuilder.pool(LootPool.builder()
+						.rolls(UniformLootNumberProvider.create(1, 2))
+						.with(ItemEntry.builder(Items.POTION)
+								.weight(3)
+								.apply(SetPotionLootFunction.builder(Potions.NIGHT_VISION))
+								.build())
+						.with(ItemEntry.builder(Items.POTION)
+								.weight(1)
+								.apply(SetPotionLootFunction.builder(Potions.LONG_NIGHT_VISION))
+								.build())
+						.conditionally(RandomChanceLootCondition.builder(.4f))
+						.build());
+			}
+			if (id.equals(LootTables.SHIPWRECK_TREASURE_CHEST)) {
+				tableBuilder.pool(LootPool.builder()
+						.rolls(UniformLootNumberProvider.create(1, 2))
+						.with(ItemEntry.builder(Items.POTION)
+								.weight(3)
+								.apply(SetPotionLootFunction.builder(Potions.WATER_BREATHING))
+								.build())
+						.with(ItemEntry.builder(Items.POTION)
+								.weight(1)
+								.apply(SetPotionLootFunction.builder(Potions.LONG_WATER_BREATHING))
+								.build())
+						.conditionally(RandomChanceLootCondition.builder(.8f))
+						.build());
+			}
 		});
 	}
 }

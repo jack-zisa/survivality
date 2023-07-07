@@ -138,10 +138,13 @@ public class SurvivalityConfig {
     public MutableBoolean noInitialSignEdit = new MutableBoolean(true);
 
     @ConfigEntry
-    public MutableFloat buddingAmethystStrength = new MutableFloat(3f);
+    public MutableFloat buddingAmethystStrength = new MutableFloat(4.5f);
 
     @ConfigEntry
     public MutableBoolean slotMachineGildedBlackstone = new MutableBoolean(true);
+
+    @ConfigEntry
+    public MutableBoolean structurePotions = new MutableBoolean(true);
 
     public YetAnotherConfigLib getYACL() {
         YetAnotherConfigLib config = YetAnotherConfigLib.createBuilder()
@@ -300,6 +303,10 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.slotMachineGildedBlackstone"),
                                 Text.translatable("text.survivality.config.option.slotMachineGildedBlackstone.@Tooltip"),
                                 slotMachineGildedBlackstone, true))
+                        .option(createBooleanOption(
+                                Text.translatable("text.survivality.config.option.structurePotions"),
+                                Text.translatable("text.survivality.config.option.structurePotions.@Tooltip"),
+                                structurePotions, true))
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("text.survivality.config.creative"))
@@ -402,6 +409,8 @@ public class SurvivalityConfig {
                 buddingAmethystStrength.setValue(survival.get("budding_amethyst_strength").getAsInt());
             if (survival.get("slot_machine_gilded_blackstone") != null)
                 slotMachineGildedBlackstone.setValue(survival.get("slot_machine_gilded_blackstone").getAsBoolean());
+            if (survival.get("structure_potions") != null)
+                structurePotions.setValue(survival.get("structure_potions").getAsBoolean());
 
             if (creative.get("unbound_enchant") != null)
                 unboundEnchant.setValue(creative.get("unbound_enchant").getAsBoolean());
@@ -457,6 +466,7 @@ public class SurvivalityConfig {
             survival.addProperty("no_initial_sign_edit", noInitialSignEdit.booleanValue());
             survival.addProperty("budding_amethyst_strength", buddingAmethystStrength.intValue());
             survival.addProperty("slot_machine_gilded_blackstone", slotMachineGildedBlackstone.booleanValue());
+            survival.addProperty("structure_potions", structurePotions.booleanValue());
 
             creative.addProperty("unbound_enchant", unboundEnchant.booleanValue());
 
