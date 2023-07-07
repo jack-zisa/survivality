@@ -55,7 +55,7 @@ public class Survivality implements ModInitializer {
 				snowmenSpawn = false;
 			if (ModMenuIntegration.CONFIG.buddingAmethystStrength.intValue() < 0)
 				harderBuddingAmethyst = false;
-			if (ModMenuIntegration.CONFIG.slotMachineGildedBlackstone.booleanValue())
+			if (!ModMenuIntegration.CONFIG.slotMachineGildedBlackstone.booleanValue())
 				slotMachineGildedBlackstone = false;
 		}
 
@@ -86,7 +86,7 @@ public class Survivality implements ModInitializer {
 		}
 
 		if (harderBuddingAmethyst)
-			BlockUtil.setHardness(Blocks.BUDDING_AMETHYST, 3f);
+			BlockUtil.setHardness(Blocks.BUDDING_AMETHYST, 4.5f);
 
 		if (slotMachineGildedBlackstone)
 			registerSlotMachineGildedBlackstoneLootTable();
