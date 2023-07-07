@@ -134,6 +134,12 @@ public class SurvivalityConfig {
     @ConfigEntry
     public MutableBoolean creeperChainExplosions = new MutableBoolean(true);
 
+    @ConfigEntry
+    public MutableInt creeperChainExplosionFuseTime = new MutableInt(20);
+
+    @ConfigEntry
+    public MutableBoolean noInitialSignEdit = new MutableBoolean(true);
+
     public YetAnotherConfigLib getYACL() {
         YetAnotherConfigLib config = YetAnotherConfigLib.createBuilder()
                 .title(Text.translatable("text.survivality.config.title"))
@@ -279,6 +285,14 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.creeperChainExplosions"),
                                 Text.translatable("text.survivality.config.option.creeperChainExplosions.@Tooltip"),
                                 creeperChainExplosions, true))
+                        .option(createIntegerOption(
+                                Text.translatable("text.survivality.config.option.creeperChainExplosionFuseTime"),
+                                Text.translatable("text.survivality.config.option.creeperChainExplosionFuseTime.@Tooltip"),
+                                creeperChainExplosionFuseTime, 20, 0, 30, 1))
+                        .option(createBooleanOption(
+                                Text.translatable("text.survivality.config.option.noInitialSignEdit"),
+                                Text.translatable("text.survivality.config.option.noInitialSignEdit.@Tooltip"),
+                                noInitialSignEdit, true))
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("text.survivality.config.creative"))
@@ -302,43 +316,86 @@ public class SurvivalityConfig {
         try {
             String jsonString = Files.readString(configPath);
             JsonObject json = gson.fromJson(jsonString, JsonObject.class);
+            JsonObject survival = json.getAsJsonObject("survival");
+            JsonObject creative = json.getAsJsonObject("creative");
 
-            safeCactus.setValue(json.get("safe_cactus").getAsBoolean());
-            featheryFallingBoots.setValue(json.get("feathery_falling_boots").getAsBoolean());
-            unstableDripstone.setValue(json.get("unstable_dripstone").getAsBoolean());
-            betterNightVision.setValue(json.get("better_night_vision").getAsBoolean());
-            maxNightVisionModifier.setValue(json.get("max_night_vision_modifier").getAsFloat());
-            maxMultishotLevel.setValue(json.get("max_multishot_level").getAsInt());
-            maxMinecartSpeed.setValue(json.get("max_minecart_speed").getAsDouble());
-            tridentDropRate.setValue(json.get("trident_drop_rate").getAsFloat());
-            eyeOfEnderBreakChance.setValue(json.get("eye_of_ender_break_chance").getAsFloat());
-            zombieHorseTransmutation.setValue(json.get("zombie_horse_transmutation").getAsBoolean());
-            rideableZombieHorses.setValue(json.get("rideable_zombie_horses").getAsBoolean());
-            playerXpModifier.setValue(json.get("player_xp_modifier").getAsDouble());
-            colorfulSheep.setValue(json.get("colorful_sheep").getAsBoolean());
-            maxSlimeSize.setValue(json.get("max_slime_size").getAsInt());
-            maxMagmaCubeSize.setValue(json.get("max_magma_cube_size").getAsInt());
-            moreSnacks.setValue(json.get("more_snacks").getAsBoolean());
-            shovelableSnow.setValue(json.get("shovelable_snow").getAsBoolean());
-            variantSpawners.setValue(json.get("variant_spawners").getAsBoolean());
-            randomWorldStartTime.setValue(json.get("random_world_start_time").getAsBoolean());
-            randomWorldStartWeather.setValue(json.get("random_world_start_weather").getAsBoolean());
-            randomWorldStartSpawnPos.setValue(json.get("random_world_start_spawn_pos").getAsBoolean());
-            randomWorldStartBiome.setValue(json.get("random_world_start_biome").getAsBoolean());
-            rocketBoosting.setValue(json.get("rocket_boosting").getAsBoolean());
-            spawnerRequiredPlayerRange.setValue(json.get("spawner_required_player_range").getAsInt());
-            unrestrictedSpawners.setValue(json.get("unrestricted_spawners").getAsBoolean());
-            polarBearCavalryChance.setValue(json.get("polar_bear_cavalry_chance").getAsFloat());
-            boatsIgnoreWaterlilies.setValue(json.get("boats_ignore_waterlilies").getAsBoolean());
-            unboundEnchant.setValue(json.get("unbound_enchant").getAsBoolean());
-            cactusGrowHeight.setValue(json.get("cactus_grow_height").getAsInt());
-            sugarCaneGrowHeight.setValue(json.get("sugar_cane_grow_height").getAsInt());
-            fertilizableDirt.setValue(json.get("fertilize_dirt").getAsBoolean());
-            tntFuelExplosionChance.setValue(json.get("tnt_fuel_explosion_chance").getAsFloat());
-            snowFog.setValue(json.get("snow_fog").getAsBoolean());
-            stackedPotions.setValue(json.get("stacked_potions").getAsBoolean());
-            snowGolemSpawnWeight.setValue(json.get("snow_golem_spawn_weight").getAsInt());
-            creeperChainExplosions.setValue(json.get("creeper_chain_explosions").getAsBoolean());
+            if (survival.get("safe_cactus") != null)
+                safeCactus.setValue(survival.get("safe_cactus").getAsBoolean());
+            if (survival.get("feathery_falling_boots") != null)
+                featheryFallingBoots.setValue(survival.get("feathery_falling_boots").getAsBoolean());
+            if (survival.get("unstable_dripstone") != null)
+                unstableDripstone.setValue(survival.get("unstable_dripstone").getAsBoolean());
+            if (survival.get("better_night_vision") != null)
+                betterNightVision.setValue(survival.get("better_night_vision").getAsBoolean());
+            if (survival.get("max_night_vision_modifier") != null)
+                maxNightVisionModifier.setValue(survival.get("max_night_vision_modifier").getAsFloat());
+            if (survival.get("max_multishot_level") != null)
+                maxMultishotLevel.setValue(survival.get("max_multishot_level").getAsInt());
+            if (survival.get("max_minecart_speed") != null)
+                maxMinecartSpeed.setValue(survival.get("max_minecart_speed").getAsDouble());
+            if (survival.get("trident_drop_rate") != null)
+                tridentDropRate.setValue(survival.get("trident_drop_rate").getAsFloat());
+            if (survival.get("eye_of_ender_break_chance") != null)
+                eyeOfEnderBreakChance.setValue(survival.get("eye_of_ender_break_chance").getAsFloat());
+            if (survival.get("zombie_horse_transmutation") != null)
+                zombieHorseTransmutation.setValue(survival.get("zombie_horse_transmutation").getAsBoolean());
+            if (survival.get("rideable_zombie_horses") != null)
+                rideableZombieHorses.setValue(survival.get("rideable_zombie_horses").getAsBoolean());
+            if (survival.get("player_xp_modifier") != null)
+                playerXpModifier.setValue(survival.get("player_xp_modifier").getAsDouble());
+            if (survival.get("colorful_sheep") != null)
+                colorfulSheep.setValue(survival.get("colorful_sheep").getAsBoolean());
+            if (survival.get("max_slime_size") != null)
+                maxSlimeSize.setValue(survival.get("max_slime_size").getAsInt());
+            if (survival.get("max_magma_cube_size") != null)
+                maxMagmaCubeSize.setValue(survival.get("max_magma_cube_size").getAsInt());
+            if (survival.get("more_snacks") != null)
+                moreSnacks.setValue(survival.get("more_snacks").getAsBoolean());
+            if (survival.get("shovelable_snow") != null)
+                shovelableSnow.setValue(survival.get("shovelable_snow").getAsBoolean());
+            if (survival.get("variant_spawners") != null)
+                variantSpawners.setValue(survival.get("variant_spawners").getAsBoolean());
+            if (survival.get("random_world_start_time") != null)
+                randomWorldStartTime.setValue(survival.get("random_world_start_time").getAsBoolean());
+            if (survival.get("random_world_start_weather") != null)
+                randomWorldStartWeather.setValue(survival.get("random_world_start_weather").getAsBoolean());
+            if (survival.get("random_world_start_spawn_pos") != null)
+                randomWorldStartSpawnPos.setValue(survival.get("random_world_start_spawn_pos").getAsBoolean());
+            if (survival.get("random_world_start_biome") != null)
+                randomWorldStartBiome.setValue(survival.get("random_world_start_biome").getAsBoolean());
+            if (survival.get("rocket_boosting") != null)
+                rocketBoosting.setValue(survival.get("rocket_boosting").getAsBoolean());
+            if (survival.get("spawner_required_player_range") != null)
+                spawnerRequiredPlayerRange.setValue(survival.get("spawner_required_player_range").getAsInt());
+            if (survival.get("unrestricted_spawners") != null)
+                unrestrictedSpawners.setValue(survival.get("unrestricted_spawners").getAsBoolean());
+            if (survival.get("polar_bear_cavalry_chance") != null)
+                polarBearCavalryChance.setValue(survival.get("polar_bear_cavalry_chance").getAsFloat());
+            if (survival.get("boats_ignore_waterlilies") != null)
+                boatsIgnoreWaterlilies.setValue(survival.get("boats_ignore_waterlilies").getAsBoolean());
+            if (survival.get("cactus_grow_height") != null)
+                cactusGrowHeight.setValue(survival.get("cactus_grow_height").getAsInt());
+            if (survival.get("sugar_cane_grow_height") != null)
+                sugarCaneGrowHeight.setValue(survival.get("sugar_cane_grow_height").getAsInt());
+            if (survival.get("fertilize_dirt") != null)
+                fertilizableDirt.setValue(survival.get("fertilize_dirt").getAsBoolean());
+            if (survival.get("tnt_fuel_explosion_chance") != null)
+                tntFuelExplosionChance.setValue(survival.get("tnt_fuel_explosion_chance").getAsFloat());
+            if (survival.get("snow_fog") != null)
+                snowFog.setValue(survival.get("snow_fog").getAsBoolean());
+            if (survival.get("stacked_potions") != null)
+                stackedPotions.setValue(survival.get("stacked_potions").getAsBoolean());
+            if (survival.get("snow_golem_spawn_weight") != null)
+                snowGolemSpawnWeight.setValue(survival.get("snow_golem_spawn_weight").getAsInt());
+            if (survival.get("creeper_chain_explosions") != null)
+                creeperChainExplosions.setValue(survival.get("creeper_chain_explosions").getAsBoolean());
+            if (survival.get("creeper_chain_explosion_fuse_time") != null)
+                creeperChainExplosionFuseTime.setValue(survival.get("creeper_chain_explosion_fuse_time").getAsInt());
+            if (survival.get("no_initial_sign_edit") != null)
+                noInitialSignEdit.setValue(survival.get("no_initial_sign_edit").getAsBoolean());
+
+            if (creative.get("unbound_enchant") != null)
+                unboundEnchant.setValue(creative.get("unbound_enchant").getAsBoolean());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -349,42 +406,49 @@ public class SurvivalityConfig {
             Files.deleteIfExists(configPath);
 
             JsonObject json = new JsonObject();
-            json.addProperty("safe_cactus", safeCactus.booleanValue());
-            json.addProperty("feathery_falling_boots", featheryFallingBoots.booleanValue());
-            json.addProperty("unstable_dripstone", unstableDripstone.booleanValue());
-            json.addProperty("better_night_vision", betterNightVision.booleanValue());
-            json.addProperty("max_night_vision_modifier", maxNightVisionModifier.floatValue());
-            json.addProperty("max_multishot_level", maxMultishotLevel.intValue());
-            json.addProperty("max_minecart_speed", maxMinecartSpeed.doubleValue());
-            json.addProperty("trident_drop_rate", tridentDropRate.floatValue());
-            json.addProperty("eye_of_ender_break_chance", eyeOfEnderBreakChance.floatValue());
-            json.addProperty("zombie_horse_transmutation", zombieHorseTransmutation.booleanValue());
-            json.addProperty("rideable_zombie_horses", rideableZombieHorses.booleanValue());
-            json.addProperty("player_xp_modifier", playerXpModifier.doubleValue());
-            json.addProperty("colorful_sheep", colorfulSheep.booleanValue());
-            json.addProperty("max_slime_size", maxSlimeSize.intValue());
-            json.addProperty("max_magma_cube_size", maxMagmaCubeSize.intValue());
-            json.addProperty("more_snacks", moreSnacks.booleanValue());
-            json.addProperty("shovelable_snow", shovelableSnow.booleanValue());
-            json.addProperty("variant_spawners", variantSpawners.booleanValue());
-            json.addProperty("random_world_start_time", randomWorldStartTime.booleanValue());
-            json.addProperty("random_world_start_weather", randomWorldStartWeather.booleanValue());
-            json.addProperty("random_world_start_spawn_pos", randomWorldStartSpawnPos.booleanValue());
-            json.addProperty("random_world_start_biome", randomWorldStartBiome.booleanValue());
-            json.addProperty("rocket_boosting", rocketBoosting.booleanValue());
-            json.addProperty("spawner_required_player_range", spawnerRequiredPlayerRange.intValue());
-            json.addProperty("unrestricted_spawners", unrestrictedSpawners.booleanValue());
-            json.addProperty("polar_bear_cavalry_chance", polarBearCavalryChance.floatValue());
-            json.addProperty("boats_ignore_waterlilies", boatsIgnoreWaterlilies.booleanValue());
-            json.addProperty("unbound_enchant", unboundEnchant.booleanValue());
-            json.addProperty("cactus_grow_height", cactusGrowHeight.intValue());
-            json.addProperty("sugar_cane_grow_height", sugarCaneGrowHeight.intValue());
-            json.addProperty("fertilize_dirt", fertilizableDirt.booleanValue());
-            json.addProperty("tnt_fuel_explosion_chance", tntFuelExplosionChance.floatValue());
-            json.addProperty("snow_fog", snowFog.booleanValue());
-            json.addProperty("stacked_potions", stackedPotions.booleanValue());
-            json.addProperty("snow_golem_spawn_weight", snowGolemSpawnWeight.intValue());
-            json.addProperty("creeper_chain_explosions", creeperChainExplosions.booleanValue());
+            JsonObject survival = new JsonObject();
+            JsonObject creative = new JsonObject();
+            json.add("survival", survival);
+            json.add("creative", creative);
+            survival.addProperty("safe_cactus", safeCactus.booleanValue());
+            survival.addProperty("feathery_falling_boots", featheryFallingBoots.booleanValue());
+            survival.addProperty("unstable_dripstone", unstableDripstone.booleanValue());
+            survival.addProperty("better_night_vision", betterNightVision.booleanValue());
+            survival.addProperty("max_night_vision_modifier", maxNightVisionModifier.floatValue());
+            survival.addProperty("max_multishot_level", maxMultishotLevel.intValue());
+            survival.addProperty("max_minecart_speed", maxMinecartSpeed.doubleValue());
+            survival.addProperty("trident_drop_rate", tridentDropRate.floatValue());
+            survival.addProperty("eye_of_ender_break_chance", eyeOfEnderBreakChance.floatValue());
+            survival.addProperty("zombie_horse_transmutation", zombieHorseTransmutation.booleanValue());
+            survival.addProperty("rideable_zombie_horses", rideableZombieHorses.booleanValue());
+            survival.addProperty("player_xp_modifier", playerXpModifier.doubleValue());
+            survival.addProperty("colorful_sheep", colorfulSheep.booleanValue());
+            survival.addProperty("max_slime_size", maxSlimeSize.intValue());
+            survival.addProperty("max_magma_cube_size", maxMagmaCubeSize.intValue());
+            survival.addProperty("more_snacks", moreSnacks.booleanValue());
+            survival.addProperty("shovelable_snow", shovelableSnow.booleanValue());
+            survival.addProperty("variant_spawners", variantSpawners.booleanValue());
+            survival.addProperty("random_world_start_time", randomWorldStartTime.booleanValue());
+            survival.addProperty("random_world_start_weather", randomWorldStartWeather.booleanValue());
+            survival.addProperty("random_world_start_spawn_pos", randomWorldStartSpawnPos.booleanValue());
+            survival.addProperty("random_world_start_biome", randomWorldStartBiome.booleanValue());
+            survival.addProperty("rocket_boosting", rocketBoosting.booleanValue());
+            survival.addProperty("spawner_required_player_range", spawnerRequiredPlayerRange.intValue());
+            survival.addProperty("unrestricted_spawners", unrestrictedSpawners.booleanValue());
+            survival.addProperty("polar_bear_cavalry_chance", polarBearCavalryChance.floatValue());
+            survival.addProperty("boats_ignore_waterlilies", boatsIgnoreWaterlilies.booleanValue());
+            survival.addProperty("cactus_grow_height", cactusGrowHeight.intValue());
+            survival.addProperty("sugar_cane_grow_height", sugarCaneGrowHeight.intValue());
+            survival.addProperty("fertilize_dirt", fertilizableDirt.booleanValue());
+            survival.addProperty("tnt_fuel_explosion_chance", tntFuelExplosionChance.floatValue());
+            survival.addProperty("snow_fog", snowFog.booleanValue());
+            survival.addProperty("stacked_potions", stackedPotions.booleanValue());
+            survival.addProperty("snow_golem_spawn_weight", snowGolemSpawnWeight.intValue());
+            survival.addProperty("creeper_chain_explosions", creeperChainExplosions.booleanValue());
+            survival.addProperty("creeper_chain_explosion_fuse_time", creeperChainExplosionFuseTime.intValue());
+            survival.addProperty("no_initial_sign_edit", noInitialSignEdit.booleanValue());
+
+            creative.addProperty("unbound_enchant", unboundEnchant.booleanValue());
 
             Files.createFile(configPath);
             Files.writeString(configPath, gson.toJson(json));

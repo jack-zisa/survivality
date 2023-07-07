@@ -1,5 +1,7 @@
 package com.github.creoii.survivality;
 
+import com.github.creoii.creolib.api.event.entity.EntitySpawnCallback;
+import com.github.creoii.creolib.api.util.entity.EntityUtil;
 import com.github.creoii.creolib.api.util.fog.FogFunction;
 import com.github.creoii.creolib.api.util.fog.FogModifier;
 import com.github.creoii.creolib.api.util.item.ItemUtil;
@@ -11,11 +13,14 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.render.FogShape;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.*;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.Items;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 
 public class Survivality implements ModInitializer {
@@ -51,26 +56,41 @@ public class Survivality implements ModInitializer {
 		}
 
 		if (snowmenSpawn) {
-			BiomeModifications.addSpawn(BiomeSelectors.tag(SurvivalityTags.SNOW_GOLEM_BIOMES), SpawnGroup.CREATURE, EntityType.SNOW_GOLEM, 10, 1, 1);
+			EntityUtil.setSpawnGroup(EntityType.SNOW_GOLEM, SpawnGroup.CREATURE);
+			SpawnRestriction.RESTRICTIONS.remove(EntityType.SNOW_GOLEM);
+			SpawnRestriction.register(EntityType.SNOW_GOLEM, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, Survivality::canSnowGolemSpawn);
+			BiomeModifications.addSpawn(BiomeSelectors.tag(SurvivalityTags.SNOW_GOLEM_BIOMES), SpawnGroup.MISC, EntityType.SNOW_GOLEM, 100, 1, 1);
 		}
 
 		if (snowFog) {
-			FogModifier.register(FogModifier.createColored(
+			FogModifier.register(FogModifier.create(
 					Survivality::snowFogPredicate,
-					fogFunction -> 4f,
+					fogFunction -> 0f,
 					fogFunction -> 96f,
-					.01f,
-					FogShape.SPHERE,
-					new Vec3d(192d, 192d, 192d)
+					.0025f,
+					FogShape.SPHERE
 			));
 		}
+
+		EntitySpawnCallback.EVENT.register((world, entity, blockPos, spawnReason) -> {
+			if (entity.getType() == EntityType.SNOW_GOLEM) {
+				System.out.println("snow golem spawned");
+			}
+			return true;
+		});
+	}
+
+	public static boolean canSnowGolemSpawn(EntityType<? extends MobEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+		BlockPos blockPos = pos.down();
+		return world.getBlockState(blockPos).allowsSpawning(world, blockPos, type);
 	}
 
 	public static boolean snowFogPredicate(FogFunction fogFunction) {
 		if (CONFIG_AVAILABLE && !ModMenuIntegration.CONFIG.snowFog.booleanValue()) return false;
+		if (!fogFunction.world().isRaining()) return false;
 		RegistryEntry<Biome> biomeEntry = fogFunction.biomeEntry();
 		if (biomeEntry != null && biomeEntry.hasKeyAndValue()) {
-			return fogFunction.world().isRaining() && biomeEntry.isIn(SurvivalityTags.SNOW_FOG_BIOMES);
+			return biomeEntry.isIn(SurvivalityTags.SNOW_FOG_BIOMES);
 		} return false;
 	}
 }

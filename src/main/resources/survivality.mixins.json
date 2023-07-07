@@ -37,6 +37,7 @@
     "item.FireworkRocketItemMixin",
     "item.ItemMixin",
     "item.ShovelItemMixin",
+    "item.SignItemMixin",
     "misc.AnvilScreenHandlerMixin",
     "misc.MobSpawnerLogicMixin",
     "world.CollisionViewMixin",
