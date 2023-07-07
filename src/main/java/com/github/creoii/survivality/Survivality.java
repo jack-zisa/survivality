@@ -1,6 +1,7 @@
 package com.github.creoii.survivality;
 
 import com.github.creoii.creolib.api.event.entity.EntitySpawnCallback;
+import com.github.creoii.creolib.api.util.block.BlockUtil;
 import com.github.creoii.creolib.api.util.entity.EntityUtil;
 import com.github.creoii.creolib.api.util.fog.FogFunction;
 import com.github.creoii.creolib.api.util.fog.FogModifier;
@@ -10,13 +11,19 @@ import com.github.creoii.survivality.util.SurvivalityTags;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.render.FogShape;
+import net.minecraft.data.server.loottable.vanilla.VanillaBlockLootTableGenerator;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
@@ -33,6 +40,8 @@ public class Survivality implements ModInitializer {
 		boolean snowFog = true;
 		boolean stackedPotions = true;
 		boolean snowmenSpawn = true;
+		boolean harderBuddingAmethyst = true;
+		boolean slotMachineGildedBlackstone = true;
 		if (CONFIG_AVAILABLE && ModMenuIntegration.CONFIG != null) {
 			ModMenuIntegration.CONFIG.preload();
 
@@ -44,6 +53,10 @@ public class Survivality implements ModInitializer {
 				stackedPotions = false;
 			if (ModMenuIntegration.CONFIG.snowGolemSpawnWeight.intValue() < 0)
 				snowmenSpawn = false;
+			if (ModMenuIntegration.CONFIG.buddingAmethystStrength.intValue() < 0)
+				harderBuddingAmethyst = false;
+			if (ModMenuIntegration.CONFIG.slotMachineGildedBlackstone.booleanValue())
+				slotMachineGildedBlackstone = false;
 		}
 
 		if (tntFuel)
@@ -72,12 +85,11 @@ public class Survivality implements ModInitializer {
 			));
 		}
 
-		EntitySpawnCallback.EVENT.register((world, entity, blockPos, spawnReason) -> {
-			if (entity.getType() == EntityType.SNOW_GOLEM) {
-				System.out.println("snow golem spawned");
-			}
-			return true;
-		});
+		if (harderBuddingAmethyst)
+			BlockUtil.setHardness(Blocks.BUDDING_AMETHYST, 3f);
+
+		if (slotMachineGildedBlackstone)
+			registerSlotMachineGildedBlackstoneLootTable();
 	}
 
 	public static boolean canSnowGolemSpawn(EntityType<? extends MobEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
@@ -92,5 +104,14 @@ public class Survivality implements ModInitializer {
 		if (biomeEntry != null && biomeEntry.hasKeyAndValue()) {
 			return biomeEntry.isIn(SurvivalityTags.SNOW_FOG_BIOMES);
 		} return false;
+	}
+
+	private static void registerSlotMachineGildedBlackstoneLootTable() {
+		LootTableEvents.REPLACE.register((resourceManager, lootManager, id, original, source) -> {
+			if (id.equals(new Identifier("minecraft", "blocks/gilded_blackstone"))) {
+				return lootManager.getLootTable(new Identifier(NAMESPACE, "blocks/slot_machine_gilded_blackstone"));
+			}
+			return original;
+		});
 	}
 }

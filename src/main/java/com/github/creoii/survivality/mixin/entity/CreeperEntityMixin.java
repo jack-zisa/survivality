@@ -34,17 +34,14 @@ public abstract class CreeperEntityMixin extends HostileEntity implements SkinOv
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        boolean value = !Survivality.CONFIG_AVAILABLE || !ModMenuIntegration.CONFIG.creeperChainExplosions.booleanValue();
+        boolean value = !Survivality.CONFIG_AVAILABLE || ModMenuIntegration.CONFIG.creeperChainExplosionFuseTime.intValue() <= -1;
         if (!value && !isDead() && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
-            System.out.println("try chain explode");
             if (!hasChainExploded()) {
-                System.out.println("chain explode success");
                 setFuseSpeed(1);
                 currentFuseTime = 20;
                 ignite();
                 return true;
             }
-            System.out.println("already chain exploded");
         }
         return super.damage(source, amount);
     }

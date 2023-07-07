@@ -132,13 +132,16 @@ public class SurvivalityConfig {
     public MutableInt snowGolemSpawnWeight = new MutableInt(10);
 
     @ConfigEntry
-    public MutableBoolean creeperChainExplosions = new MutableBoolean(true);
-
-    @ConfigEntry
     public MutableInt creeperChainExplosionFuseTime = new MutableInt(20);
 
     @ConfigEntry
     public MutableBoolean noInitialSignEdit = new MutableBoolean(true);
+
+    @ConfigEntry
+    public MutableFloat buddingAmethystStrength = new MutableFloat(3f);
+
+    @ConfigEntry
+    public MutableBoolean slotMachineGildedBlackstone = new MutableBoolean(true);
 
     public YetAnotherConfigLib getYACL() {
         YetAnotherConfigLib config = YetAnotherConfigLib.createBuilder()
@@ -281,18 +284,22 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.snowGolemSpawnWeight"),
                                 Text.translatable("text.survivality.config.option.snowGolemSpawnWeight.@Tooltip"),
                                 maxMagmaCubeSize, 10, -1, 100, 1))
-                        .option(createBooleanOption(
-                                Text.translatable("text.survivality.config.option.creeperChainExplosions"),
-                                Text.translatable("text.survivality.config.option.creeperChainExplosions.@Tooltip"),
-                                creeperChainExplosions, true))
                         .option(createIntegerOption(
                                 Text.translatable("text.survivality.config.option.creeperChainExplosionFuseTime"),
                                 Text.translatable("text.survivality.config.option.creeperChainExplosionFuseTime.@Tooltip"),
-                                creeperChainExplosionFuseTime, 20, 0, 30, 1))
+                                creeperChainExplosionFuseTime, 20, -1, 30, 1))
                         .option(createBooleanOption(
                                 Text.translatable("text.survivality.config.option.noInitialSignEdit"),
                                 Text.translatable("text.survivality.config.option.noInitialSignEdit.@Tooltip"),
                                 noInitialSignEdit, true))
+                        .option(createFloatOption(
+                                Text.translatable("text.survivality.config.option.buddingAmethystStrength"),
+                                Text.translatable("text.survivality.config.option.buddingAmethystStrength.@Tooltip"),
+                                buddingAmethystStrength, 3f, 0f, 30f, .5f))
+                        .option(createBooleanOption(
+                                Text.translatable("text.survivality.config.option.slotMachineGildedBlackstone"),
+                                Text.translatable("text.survivality.config.option.slotMachineGildedBlackstone.@Tooltip"),
+                                slotMachineGildedBlackstone, true))
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("text.survivality.config.creative"))
@@ -388,11 +395,13 @@ public class SurvivalityConfig {
             if (survival.get("snow_golem_spawn_weight") != null)
                 snowGolemSpawnWeight.setValue(survival.get("snow_golem_spawn_weight").getAsInt());
             if (survival.get("creeper_chain_explosions") != null)
-                creeperChainExplosions.setValue(survival.get("creeper_chain_explosions").getAsBoolean());
-            if (survival.get("creeper_chain_explosion_fuse_time") != null)
                 creeperChainExplosionFuseTime.setValue(survival.get("creeper_chain_explosion_fuse_time").getAsInt());
             if (survival.get("no_initial_sign_edit") != null)
                 noInitialSignEdit.setValue(survival.get("no_initial_sign_edit").getAsBoolean());
+            if (survival.get("budding_amethyst_strength") != null)
+                buddingAmethystStrength.setValue(survival.get("budding_amethyst_strength").getAsInt());
+            if (survival.get("slot_machine_gilded_blackstone") != null)
+                slotMachineGildedBlackstone.setValue(survival.get("slot_machine_gilded_blackstone").getAsBoolean());
 
             if (creative.get("unbound_enchant") != null)
                 unboundEnchant.setValue(creative.get("unbound_enchant").getAsBoolean());
@@ -444,9 +453,10 @@ public class SurvivalityConfig {
             survival.addProperty("snow_fog", snowFog.booleanValue());
             survival.addProperty("stacked_potions", stackedPotions.booleanValue());
             survival.addProperty("snow_golem_spawn_weight", snowGolemSpawnWeight.intValue());
-            survival.addProperty("creeper_chain_explosions", creeperChainExplosions.booleanValue());
             survival.addProperty("creeper_chain_explosion_fuse_time", creeperChainExplosionFuseTime.intValue());
             survival.addProperty("no_initial_sign_edit", noInitialSignEdit.booleanValue());
+            survival.addProperty("budding_amethyst_strength", buddingAmethystStrength.intValue());
+            survival.addProperty("slot_machine_gilded_blackstone", slotMachineGildedBlackstone.booleanValue());
 
             creative.addProperty("unbound_enchant", unboundEnchant.booleanValue());
 

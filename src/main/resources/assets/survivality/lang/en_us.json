@@ -75,12 +75,14 @@
   "text.survivality.config.option.stackedPotions.@Tooltip": "Potions stack to 16",
   "text.survivality.config.option.snowGolemSpawnWeight": "Snow Golem Spawn Weight",
   "text.survivality.config.option.snowGolemSpawnWeight.@Tooltip": "Chance for Snow Golems to spawn",
-  "text.survivality.config.option.creeperChainExplosions": "Creeper Chain Explosions",
-  "text.survivality.config.option.creeperChainExplosions.@Tooltip": "Creepers explode when exploded by other creepers",
   "text.survivality.config.option.creeperChainExplosionFuseTime": "Creeper Chain Explosion Fuse Time",
-  "text.survivality.config.option.creeperChainExplosionFuseTime.@Tooltip": "Time for a chained explosion to occur. Higher values mean a faster explosion",
+  "text.survivality.config.option.creeperChainExplosionFuseTime.@Tooltip": "Time for a chained explosion to occur. Higher values mean a faster explosion. Set to -1 to disable",
   "text.survivality.config.option.noInitialSignEdit": "No Initial Sign Edit",
   "text.survivality.config.option.noInitialSignEdit.@Tooltip": "Stop editing signs as soon as they are placed",
+  "text.survivality.config.option.buddingAmethystStrength": "Budding Amethyst Strength",
+  "text.survivality.config.option.buddingAmethystStrength.@Tooltip": "Increases the strength of Budding Amethyst so you don't accidentally break it",
+  "text.survivality.config.option.slotMachineGildedBlackstone": "Slot Machine Gilded Blackstone",
+  "text.survivality.config.option.slotMachineGildedBlackstone.@Tooltip": "Gilded Blackstone loot becomes a totally-not-addicting game of gold",
 
   "text.survivality.config.option.unboundEnchant": "Unbound /enchant",
   "text.survivality.config.option.unboundEnchant.@Tooltip": "/enchant allows any level of enchantment"
