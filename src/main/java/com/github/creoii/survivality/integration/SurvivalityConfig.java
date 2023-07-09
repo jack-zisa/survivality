@@ -120,7 +120,7 @@ public class SurvivalityConfig {
     public MutableBoolean fertilizableDirt = new MutableBoolean(true);
 
     @ConfigEntry
-    public MutableFloat tntFuelExplosionChance = new MutableFloat(.25f);
+    public MutableFloat explosiveFuelExplosionChance = new MutableFloat(.25f);
 
     @ConfigEntry
     public MutableBoolean snowFog = new MutableBoolean(true);
@@ -272,9 +272,9 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.fertilizableDirt.@Tooltip"),
                                 fertilizableDirt, true))
                         .option(createFloatOption(
-                                Text.translatable("text.survivality.config.option.tntFuelExplosionChance"),
-                                Text.translatable("text.survivality.config.option.tntFuelExplosionChance.@Tooltip"),
-                                tntFuelExplosionChance, .25f, 0f, 1f, .05f))
+                                Text.translatable("text.survivality.config.option.explosiveFuelExplosionChance"),
+                                Text.translatable("text.survivality.config.option.explosiveFuelExplosionChance.@Tooltip"),
+                                explosiveFuelExplosionChance, .25f, 0f, 1f, .05f))
                         .option(createBooleanOption(
                                 Text.translatable("text.survivality.config.option.snowFog"),
                                 Text.translatable("text.survivality.config.option.snowFog.@Tooltip"),
@@ -298,7 +298,7 @@ public class SurvivalityConfig {
                         .option(createFloatOption(
                                 Text.translatable("text.survivality.config.option.buddingAmethystStrength"),
                                 Text.translatable("text.survivality.config.option.buddingAmethystStrength.@Tooltip"),
-                                buddingAmethystStrength, 3f, 0f, 30f, .5f))
+                                buddingAmethystStrength, 4.5f, 0f, 30f, .5f))
                         .option(createBooleanOption(
                                 Text.translatable("text.survivality.config.option.slotMachineGildedBlackstone"),
                                 Text.translatable("text.survivality.config.option.slotMachineGildedBlackstone.@Tooltip"),
@@ -393,8 +393,8 @@ public class SurvivalityConfig {
                 sugarCaneGrowHeight.setValue(survival.get("sugar_cane_grow_height").getAsInt());
             if (survival.get("fertilize_dirt") != null)
                 fertilizableDirt.setValue(survival.get("fertilize_dirt").getAsBoolean());
-            if (survival.get("tnt_fuel_explosion_chance") != null)
-                tntFuelExplosionChance.setValue(survival.get("tnt_fuel_explosion_chance").getAsFloat());
+            if (survival.get("explosive_fuel_explosion_chance") != null)
+                explosiveFuelExplosionChance.setValue(survival.get("explosive_fuel_explosion_chance").getAsFloat());
             if (survival.get("snow_fog") != null)
                 snowFog.setValue(survival.get("snow_fog").getAsBoolean());
             if (survival.get("stacked_potions") != null)
@@ -458,7 +458,7 @@ public class SurvivalityConfig {
             survival.addProperty("cactus_grow_height", cactusGrowHeight.intValue());
             survival.addProperty("sugar_cane_grow_height", sugarCaneGrowHeight.intValue());
             survival.addProperty("fertilize_dirt", fertilizableDirt.booleanValue());
-            survival.addProperty("tnt_fuel_explosion_chance", tntFuelExplosionChance.floatValue());
+            survival.addProperty("explosive_fuel_explosion_chance", explosiveFuelExplosionChance.floatValue());
             survival.addProperty("snow_fog", snowFog.booleanValue());
             survival.addProperty("stacked_potions", stackedPotions.booleanValue());
             survival.addProperty("snow_golem_spawn_weight", snowGolemSpawnWeight.intValue());

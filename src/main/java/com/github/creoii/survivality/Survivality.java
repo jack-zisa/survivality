@@ -15,7 +15,10 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.render.FogShape;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
@@ -39,7 +42,7 @@ public class Survivality implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		boolean tntFuel = true;
+		boolean explosiveFuel = true;
 		boolean snowFog = true;
 		boolean stackedPotions = true;
 		boolean snowmenSpawn = true;
@@ -49,8 +52,8 @@ public class Survivality implements ModInitializer {
 		if (CONFIG_AVAILABLE && ModMenuIntegration.CONFIG != null) {
 			ModMenuIntegration.CONFIG.preload();
 
-			if (ModMenuIntegration.CONFIG.tntFuelExplosionChance.floatValue() == 0f)
-				tntFuel = false;
+			if (ModMenuIntegration.CONFIG.explosiveFuelExplosionChance.floatValue() == 0f)
+				explosiveFuel = false;
 			if (!ModMenuIntegration.CONFIG.snowFog.booleanValue())
 				snowFog = false;
 			if (!ModMenuIntegration.CONFIG.stackedPotions.booleanValue())
@@ -65,7 +68,7 @@ public class Survivality implements ModInitializer {
 				structurePotions = false;
 		}
 
-		if (tntFuel)
+		if (explosiveFuel)
 			FuelRegistry.INSTANCE.add(Items.TNT, 50);
 
 		if (stackedPotions) {
