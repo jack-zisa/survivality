@@ -68,8 +68,10 @@ public class Survivality implements ModInitializer {
 				structurePotions = false;
 		}
 
-		if (explosiveFuel)
+		if (explosiveFuel) {
 			FuelRegistry.INSTANCE.add(Items.TNT, 50);
+			FuelRegistry.INSTANCE.add(Items.GUNPOWDER, 20);
+		}
 
 		if (stackedPotions) {
 			ItemUtil.setMaxCount(Items.POTION, 16);

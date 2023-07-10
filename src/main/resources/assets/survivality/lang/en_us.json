@@ -85,6 +85,10 @@
   "text.survivality.config.option.slotMachineGildedBlackstone.@Tooltip": "Gilded Blackstone loot becomes a totally-not-addicting game of gold",
   "text.survivality.config.option.structurePotions": "Structure Potions",
   "text.survivality.config.option.structurePotions.@Tooltip": "Find useful potions inside certain structure loot chests",
+  "text.survivality.config.option.cactusHurtsHands": "Cactus Hurts Hands",
+  "text.survivality.config.option.cactusHurtsHands.@Tooltip": "Cactus will prick when you begin to mine it with your hand",
+  "text.survivality.config.option.lightningSmeltsSand": "Lightning Smelts Sand",
+  "text.survivality.config.option.lightningSmeltsSand.@Tooltip": "Lightning strikes can turn Sand into Glass instantly",
 
   "text.survivality.config.option.unboundEnchant": "Unbound /enchant",
   "text.survivality.config.option.unboundEnchant.@Tooltip": "/enchant allows any level of enchantment"

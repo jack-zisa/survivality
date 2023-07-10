@@ -146,6 +146,12 @@ public class SurvivalityConfig {
     @ConfigEntry
     public MutableBoolean structurePotions = new MutableBoolean(true);
 
+    @ConfigEntry
+    public MutableBoolean cactusHurtsHands = new MutableBoolean(true);
+
+    @ConfigEntry
+    public MutableBoolean lightningSmeltsSand = new MutableBoolean(true);
+
     public YetAnotherConfigLib getYACL() {
         YetAnotherConfigLib config = YetAnotherConfigLib.createBuilder()
                 .title(Text.translatable("text.survivality.config.title"))
@@ -307,6 +313,14 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.structurePotions"),
                                 Text.translatable("text.survivality.config.option.structurePotions.@Tooltip"),
                                 structurePotions, true))
+                        .option(createBooleanOption(
+                                Text.translatable("text.survivality.config.option.cactusHurtsHands"),
+                                Text.translatable("text.survivality.config.option.cactusHurtsHands.@Tooltip"),
+                                cactusHurtsHands, true))
+                        .option(createBooleanOption(
+                                Text.translatable("text.survivality.config.option.lightningSmeltsSand"),
+                                Text.translatable("text.survivality.config.option.lightningSmeltsSand.@Tooltip"),
+                                lightningSmeltsSand, true))
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("text.survivality.config.creative"))
@@ -411,6 +425,10 @@ public class SurvivalityConfig {
                 slotMachineGildedBlackstone.setValue(survival.get("slot_machine_gilded_blackstone").getAsBoolean());
             if (survival.get("structure_potions") != null)
                 structurePotions.setValue(survival.get("structure_potions").getAsBoolean());
+            if (survival.get("cactus_hurts_hands") != null)
+                cactusHurtsHands.setValue(survival.get("cactus_hurts_hands").getAsBoolean());
+            if (survival.get("lightning_smelts_sand") != null)
+                lightningSmeltsSand.setValue(survival.get("lightning_smelts_sand").getAsBoolean());
 
             if (creative.get("unbound_enchant") != null)
                 unboundEnchant.setValue(creative.get("unbound_enchant").getAsBoolean());
@@ -467,6 +485,8 @@ public class SurvivalityConfig {
             survival.addProperty("budding_amethyst_strength", buddingAmethystStrength.intValue());
             survival.addProperty("slot_machine_gilded_blackstone", slotMachineGildedBlackstone.booleanValue());
             survival.addProperty("structure_potions", structurePotions.booleanValue());
+            survival.addProperty("cactus_hurts_hands", cactusHurtsHands.booleanValue());
+            survival.addProperty("lightning_smelts_sand", lightningSmeltsSand.booleanValue());
 
             creative.addProperty("unbound_enchant", unboundEnchant.booleanValue());
 
