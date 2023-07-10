@@ -41,10 +41,10 @@ public abstract class CrossbowItemMixin {
     }
 
     private static boolean loadProjectiles(LivingEntity shooter, ItemStack projectile) {
-        int i = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, projectile);
+        int level = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, projectile);
         int j;
-        if (i > 0) {
-            j = i <= 9 ? i + 2 : 12;
+        if (level > 0) {
+            j = level <= 9 ? level + 2 : 12;
         } else j = 1;
         boolean bl = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).getAbilities().creativeMode;
         ItemStack itemStack = shooter.getProjectileType(projectile);

@@ -44,6 +44,6 @@ public abstract class CactusBlockMixin extends Block {
     @SuppressWarnings("deprecation")
     public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
         if (player.getStackInHand(player.getActiveHand()).isEmpty())
-            player.damage(world.getDamageSources().cactus(), .5f);
+            player.damage(world.getDamageSources().cactus(), 1f);
     }
 }
