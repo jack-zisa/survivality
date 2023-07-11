@@ -292,7 +292,7 @@ public class SurvivalityConfig {
                         .option(createIntegerOption(
                                 Text.translatable("text.survivality.config.option.snowGolemSpawnWeight"),
                                 Text.translatable("text.survivality.config.option.snowGolemSpawnWeight.@Tooltip"),
-                                maxMagmaCubeSize, 10, -1, 100, 1))
+                                snowGolemSpawnWeight, 10, -1, 100, 1))
                         .option(createIntegerOption(
                                 Text.translatable("text.survivality.config.option.creeperChainExplosionFuseTime"),
                                 Text.translatable("text.survivality.config.option.creeperChainExplosionFuseTime.@Tooltip"),
