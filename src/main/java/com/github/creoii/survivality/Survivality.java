@@ -2,8 +2,9 @@ package com.github.creoii.survivality;
 
 import com.github.creoii.creolib.api.util.block.BlockUtil;
 import com.github.creoii.creolib.api.util.entity.EntityUtil;
-import com.github.creoii.creolib.api.util.fog.FogFunction;
+import com.github.creoii.creolib.api.util.fog.FogContext;
 import com.github.creoii.creolib.api.util.fog.FogModifier;
+import com.github.creoii.creolib.api.util.fog.FogModifiers;
 import com.github.creoii.creolib.api.util.item.ItemUtil;
 import com.github.creoii.survivality.integration.ModMenuIntegration;
 import com.github.creoii.survivality.util.SurvivalityTags;
@@ -87,13 +88,15 @@ public class Survivality implements ModInitializer {
 		}
 
 		if (snowFog) {
-			FogModifier.register(FogModifier.create(
-					Survivality::snowFogPredicate,
-					fogFunction -> 0f,
-					fogFunction -> 96f,
-					.001f,
-					FogShape.SPHERE
-			));
+			FogModifiers.register(new FogModifier.Builder()
+					.predicate(Survivality::snowFogPredicate)
+					.fogStart(0f)
+					.fogEnd(96f)
+					.densityInterpolationSpeed(.01f)
+					.fogShape(FogShape.SPHERE)
+					.color(15463935)
+					.build()
+			);
 		}
 
 		if (harderBuddingAmethyst)
@@ -111,13 +114,12 @@ public class Survivality implements ModInitializer {
 		return world.getBlockState(blockPos).allowsSpawning(world, blockPos, type);
 	}
 
-	public static boolean snowFogPredicate(FogFunction fogFunction) {
+	public static boolean snowFogPredicate(FogContext fogContext) {
 		if (CONFIG_AVAILABLE && !ModMenuIntegration.CONFIG.snowFog.booleanValue()) return false;
-		if (!fogFunction.world().isRaining()) return false;
-		RegistryEntry<Biome> biomeEntry = fogFunction.biomeEntry();
-		if (biomeEntry != null && biomeEntry.hasKeyAndValue()) {
+		if (!fogContext.world().isRaining()) return false;
+		return FogModifiers.testBiomeEntry(fogContext, biomeEntry -> {
 			return biomeEntry.isIn(SurvivalityTags.SNOW_FOG_BIOMES);
-		} return false;
+		});
 	}
 
 	private static void replaceGildedBlackstoneLootTable() {

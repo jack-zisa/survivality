@@ -16,6 +16,7 @@
     "block.CactusBlockMixin",
     "block.FarmlandBlockMixin",
     "block.PointedDripstoneBlockMixin",
+    "block.SandBlockMixin",
     "block.SugarCaneBlockMixin",
     "compat.LithiumEntityCollisionsMixin",
     "creative.command.EnchantCommandMixin",
