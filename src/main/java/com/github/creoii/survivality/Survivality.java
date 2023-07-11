@@ -91,7 +91,7 @@ public class Survivality implements ModInitializer {
 					Survivality::snowFogPredicate,
 					fogFunction -> 0f,
 					fogFunction -> 96f,
-					.0025f,
+					.001f,
 					FogShape.SPHERE
 			));
 		}
