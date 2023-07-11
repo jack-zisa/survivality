@@ -420,7 +420,7 @@ public class SurvivalityConfig {
             if (survival.get("no_initial_sign_edit") != null)
                 noInitialSignEdit.setValue(survival.get("no_initial_sign_edit").getAsBoolean());
             if (survival.get("budding_amethyst_strength") != null)
-                buddingAmethystStrength.setValue(survival.get("budding_amethyst_strength").getAsInt());
+                buddingAmethystStrength.setValue(survival.get("budding_amethyst_strength").getAsFloat());
             if (survival.get("slot_machine_gilded_blackstone") != null)
                 slotMachineGildedBlackstone.setValue(survival.get("slot_machine_gilded_blackstone").getAsBoolean());
             if (survival.get("structure_potions") != null)
@@ -482,7 +482,7 @@ public class SurvivalityConfig {
             survival.addProperty("snow_golem_spawn_weight", snowGolemSpawnWeight.intValue());
             survival.addProperty("creeper_chain_explosion_fuse_time", creeperChainExplosionFuseTime.intValue());
             survival.addProperty("no_initial_sign_edit", noInitialSignEdit.booleanValue());
-            survival.addProperty("budding_amethyst_strength", buddingAmethystStrength.intValue());
+            survival.addProperty("budding_amethyst_strength", buddingAmethystStrength.floatValue());
             survival.addProperty("slot_machine_gilded_blackstone", slotMachineGildedBlackstone.booleanValue());
             survival.addProperty("structure_potions", structurePotions.booleanValue());
             survival.addProperty("cactus_hurts_hands", cactusHurtsHands.booleanValue());
