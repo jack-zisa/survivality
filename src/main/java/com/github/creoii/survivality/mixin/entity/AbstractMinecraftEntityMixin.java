@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractMinecartEntity.class)
@@ -19,7 +20,7 @@ public abstract class AbstractMinecraftEntityMixin extends Entity {
 
     @Inject(method = "getMaxSpeed", at = @At("HEAD"), cancellable = true)
     private void survivality_increaseMaxSpeed(CallbackInfoReturnable<Double> cir) {
-        double value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.maxMinecartSpeed.doubleValue() : 1.6d;
-        cir.setReturnValue(isTouchingWater() ? value / 2d : value);
+        double value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.maxMinecartSpeed.doubleValue() : 16d;
+        cir.setReturnValue((isTouchingWater() ? value / 2d : value) / 20d);
     }
 }

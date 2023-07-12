@@ -15,6 +15,7 @@ public class FireworkRocketItemMixin {
     private boolean survivality_useFireworksOnVehicles(PlayerEntity instance) {
         boolean value = Survivality.CONFIG_AVAILABLE ? ModMenuIntegration.CONFIG.rocketBoosting.booleanValue() : true;
         if (!value) return instance.isFallFlying();
-        return instance.isFallFlying() || (instance.getVehicle() != null && instance.getVehicle().getType().isIn(SurvivalityTags.BOOSTABLE_VEHICLES));
+        boolean boostableVehicle = (instance.getVehicle() != null && instance.getVehicle().getType().isIn(SurvivalityTags.BOOSTABLE_VEHICLES));
+        return instance.isFallFlying() || boostableVehicle;
     }
 }

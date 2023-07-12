@@ -45,7 +45,7 @@ public class SurvivalityConfig {
     public MutableInt maxMultishotLevel = new MutableInt(4);
 
     @ConfigEntry
-    public MutableDouble maxMinecartSpeed = new MutableDouble(1.6d);
+    public MutableInt maxMinecartSpeed = new MutableInt(16);
 
     @ConfigEntry
     public MutableFloat tridentDropRate = new MutableFloat(.15f);
@@ -181,10 +181,10 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.maxMultishotLevel"),
                                 Text.translatable("text.survivality.config.option.maxMultishotLevel.@Tooltip"),
                                 maxMultishotLevel, 4, 1, 7, 1))
-                        .option(createDoubleOption(
+                        .option(createIntegerOption(
                                 Text.translatable("text.survivality.config.option.maxMinecartSpeed"),
                                 Text.translatable("text.survivality.config.option.maxMinecartSpeed.@Tooltip"),
-                                maxMinecartSpeed, 1.6d, 0d, 5d, .2d))
+                                maxMinecartSpeed, 16, 0, 32, 2))
                         .option(createFloatOption(
                                 Text.translatable("text.survivality.config.option.tridentDropRate"),
                                 Text.translatable("text.survivality.config.option.tridentDropRate.@Tooltip"),
@@ -360,7 +360,7 @@ public class SurvivalityConfig {
             if (survival.get("max_multishot_level") != null)
                 maxMultishotLevel.setValue(survival.get("max_multishot_level").getAsInt());
             if (survival.get("max_minecart_speed") != null)
-                maxMinecartSpeed.setValue(survival.get("max_minecart_speed").getAsDouble());
+                maxMinecartSpeed.setValue(survival.get("max_minecart_speed").getAsInt());
             if (survival.get("trident_drop_rate") != null)
                 tridentDropRate.setValue(survival.get("trident_drop_rate").getAsFloat());
             if (survival.get("eye_of_ender_break_chance") != null)
@@ -452,7 +452,7 @@ public class SurvivalityConfig {
             survival.addProperty("better_night_vision", betterNightVision.booleanValue());
             survival.addProperty("max_night_vision_modifier", maxNightVisionModifier.floatValue());
             survival.addProperty("max_multishot_level", maxMultishotLevel.intValue());
-            survival.addProperty("max_minecart_speed", maxMinecartSpeed.doubleValue());
+            survival.addProperty("max_minecart_speed", maxMinecartSpeed.intValue());
             survival.addProperty("trident_drop_rate", tridentDropRate.floatValue());
             survival.addProperty("eye_of_ender_break_chance", eyeOfEnderBreakChance.floatValue());
             survival.addProperty("zombie_horse_transmutation", zombieHorseTransmutation.booleanValue());
