@@ -1,7 +1,7 @@
 package com.github.creoii.survivality;
 
 import com.github.creoii.creolib.api.util.block.BlockUtil;
-import com.github.creoii.creolib.api.util.entity.EntityUtil;
+import com.github.creoii.creolib.api.util.entity.EntityTypeUtil;
 import com.github.creoii.creolib.api.util.fog.FogContext;
 import com.github.creoii.creolib.api.util.fog.FogModifier;
 import com.github.creoii.creolib.api.util.fog.FogModifiers;
@@ -79,19 +79,20 @@ public class Survivality implements ModInitializer {
 		}
 
 		if (snowmenSpawn) {
-			EntityUtil.setSpawnGroup(EntityType.SNOW_GOLEM, SpawnGroup.CREATURE);
+			EntityTypeUtil.setSpawnGroup(EntityType.SNOW_GOLEM, SpawnGroup.CREATURE);
 			SpawnRestriction.RESTRICTIONS.remove(EntityType.SNOW_GOLEM);
 			SpawnRestriction.register(EntityType.SNOW_GOLEM, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, Survivality::canSnowGolemSpawn);
 			BiomeModifications.addSpawn(BiomeSelectors.tag(SurvivalityTags.SNOW_GOLEM_BIOMES), SpawnGroup.MISC, EntityType.SNOW_GOLEM, 100, 1, 1);
 		}
 
 		if (snowFog) {
-			FogModifiers.register(new FogModifier.Builder()
+			FogModifiers.register(FogModifier.InjectionPoint.POST, new FogModifier.Builder()
 					.predicate(Survivality::snowFogPredicate)
-					.fogStart(0f)
-					.fogEnd(96f)
-					.densityInterpolationSpeed(.01f)
+					.fogStart(196f)
+					.fogEnd(64f)
 					.fogShape(FogShape.SPHERE)
+					.densitySpeedSeconds(8)
+					.operation(FogModifier.Operation.ADD)
 					.color(15463935)
 					.build()
 			);
