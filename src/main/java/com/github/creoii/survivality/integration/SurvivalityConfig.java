@@ -132,6 +132,9 @@ public class SurvivalityConfig {
     public MutableInt snowGolemSpawnWeight = new MutableInt(10);
 
     @ConfigEntry
+    public MutableInt snowGolemMaxSpawnSize = new MutableInt(2);
+
+    @ConfigEntry
     public MutableInt creeperChainExplosionFuseTime = new MutableInt(20);
 
     @ConfigEntry
@@ -294,6 +297,10 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.snowGolemSpawnWeight.@Tooltip"),
                                 snowGolemSpawnWeight, 10, -1, 100, 1))
                         .option(createIntegerOption(
+                                Text.translatable("text.survivality.config.option.snowGolemMaxSpawnSize"),
+                                Text.translatable("text.survivality.config.option.snowGolemMaxSpawnSize.@Tooltip"),
+                                snowGolemMaxSpawnSize, 2, 1, 10, 1))
+                        .option(createIntegerOption(
                                 Text.translatable("text.survivality.config.option.creeperChainExplosionFuseTime"),
                                 Text.translatable("text.survivality.config.option.creeperChainExplosionFuseTime.@Tooltip"),
                                 creeperChainExplosionFuseTime, 20, -1, 30, 1))
@@ -415,6 +422,8 @@ public class SurvivalityConfig {
                 stackedPotions.setValue(survival.get("stacked_potions").getAsBoolean());
             if (survival.get("snow_golem_spawn_weight") != null)
                 snowGolemSpawnWeight.setValue(survival.get("snow_golem_spawn_weight").getAsInt());
+            if (survival.get("snow_golem_max_spawn_size") != null)
+                snowGolemMaxSpawnSize.setValue(survival.get("snow_golem_max_spawn_size").getAsInt());
             if (survival.get("creeper_chain_explosions") != null)
                 creeperChainExplosionFuseTime.setValue(survival.get("creeper_chain_explosion_fuse_time").getAsInt());
             if (survival.get("no_initial_sign_edit") != null)
@@ -480,6 +489,7 @@ public class SurvivalityConfig {
             survival.addProperty("snow_fog", snowFog.booleanValue());
             survival.addProperty("stacked_potions", stackedPotions.booleanValue());
             survival.addProperty("snow_golem_spawn_weight", snowGolemSpawnWeight.intValue());
+            survival.addProperty("snow_golem_max_spawn_size", snowGolemMaxSpawnSize.intValue());
             survival.addProperty("creeper_chain_explosion_fuse_time", creeperChainExplosionFuseTime.intValue());
             survival.addProperty("no_initial_sign_edit", noInitialSignEdit.booleanValue());
             survival.addProperty("budding_amethyst_strength", buddingAmethystStrength.floatValue());

@@ -82,7 +82,7 @@ public class Survivality implements ModInitializer {
 			EntityTypeUtil.setSpawnGroup(EntityType.SNOW_GOLEM, SpawnGroup.CREATURE);
 			SpawnRestriction.RESTRICTIONS.remove(EntityType.SNOW_GOLEM);
 			SpawnRestriction.register(EntityType.SNOW_GOLEM, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, Survivality::canSnowGolemSpawn);
-			BiomeModifications.addSpawn(BiomeSelectors.tag(SurvivalityTags.SNOW_GOLEM_BIOMES), SpawnGroup.MISC, EntityType.SNOW_GOLEM, 100, 1, 1);
+			BiomeModifications.addSpawn(BiomeSelectors.tag(SurvivalityTags.SNOW_GOLEM_BIOMES), SpawnGroup.CREATURE, EntityType.SNOW_GOLEM, ModMenuIntegration.CONFIG.snowGolemSpawnWeight.intValue(), 1, ModMenuIntegration.CONFIG.snowGolemMaxSpawnSize.intValue());
 		}
 
 		if (snowFog) {
