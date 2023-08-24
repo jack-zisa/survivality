@@ -160,6 +160,34 @@ public class Survivality implements ModInitializer {
 						.conditionally(RandomChanceLootCondition.builder(.8f))
 						.build());
 			}
+			if (id.equals(LootTables.NETHER_BRIDGE_CHEST)) {
+				tableBuilder.pool(LootPool.builder()
+						.rolls(UniformLootNumberProvider.create(1, 2))
+						.with(ItemEntry.builder(Items.POTION)
+								.weight(3)
+								.apply(SetPotionLootFunction.builder(Potions.FIRE_RESISTANCE))
+								.build())
+						.with(ItemEntry.builder(Items.POTION)
+								.weight(1)
+								.apply(SetPotionLootFunction.builder(Potions.LONG_FIRE_RESISTANCE))
+								.build())
+						.conditionally(RandomChanceLootCondition.builder(.4f))
+						.build());
+			}
+			if (id.equals(LootTables.END_CITY_TREASURE_CHEST)) {
+				tableBuilder.pool(LootPool.builder()
+						.rolls(UniformLootNumberProvider.create(1, 2))
+						.with(ItemEntry.builder(Items.POTION)
+								.weight(3)
+								.apply(SetPotionLootFunction.builder(Potions.SLOW_FALLING))
+								.build())
+						.with(ItemEntry.builder(Items.POTION)
+								.weight(1)
+								.apply(SetPotionLootFunction.builder(Potions.LONG_SLOW_FALLING))
+								.build())
+						.conditionally(RandomChanceLootCondition.builder(.4f))
+						.build());
+			}
 		});
 	}
 }
