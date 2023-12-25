@@ -75,6 +75,8 @@
   "text.survivality.config.option.stackedPotions.@Tooltip": "Potions stack to 16",
   "text.survivality.config.option.snowGolemSpawnWeight": "Snow Golem Spawn Weight",
   "text.survivality.config.option.snowGolemSpawnWeight.@Tooltip": "Chance for Snow Golems to spawn",
+  "text.survivality.config.option.snowGolemMaxSpawnSize": "Snow Golem Max Spawn Size",
+  "text.survivality.config.option.snowGolemMaxSpawnSize.@Tooltip": "",
   "text.survivality.config.option.creeperChainExplosionFuseTime": "Creeper Chain Explosion Fuse Time",
   "text.survivality.config.option.creeperChainExplosionFuseTime.@Tooltip": "Time for a chained explosion to occur. Higher values mean a faster explosion. Set to -1 to disable",
   "text.survivality.config.option.noInitialSignEdit": "No Initial Sign Edit",
