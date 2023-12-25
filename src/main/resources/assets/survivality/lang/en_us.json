@@ -69,12 +69,12 @@
   "text.survivality.config.option.fertilizableDirt.@Tooltip": "Convert Dirt into Grass via Bone Meal",
   "text.survivality.config.option.explosiveFuelExplosionChance": "Explosive Fuel Explosion Chance",
   "text.survivality.config.option.explosiveFuelExplosionChance.@Tooltip": "Chance for explosive fuel (Tnt) to explode a Furnace when cooking",
-  "text.survivality.config.option.snowFog": "Snow Fog",
-  "text.survivality.config.option.snowFog.@Tooltip": "Display fog when snowing in mountain biomes",
   "text.survivality.config.option.stackedPotions": "Stacked Potions",
   "text.survivality.config.option.stackedPotions.@Tooltip": "Potions stack to 16",
   "text.survivality.config.option.snowGolemSpawnWeight": "Snow Golem Spawn Weight",
   "text.survivality.config.option.snowGolemSpawnWeight.@Tooltip": "Chance for Snow Golems to spawn",
+  "text.survivality.config.option.snowGolemMaxSpawnSize": "Snow Golem Max Spawn Size",
+  "text.survivality.config.option.snowGolemMaxSpawnSize.@Tooltip": "",
   "text.survivality.config.option.creeperChainExplosionFuseTime": "Creeper Chain Explosion Fuse Time",
   "text.survivality.config.option.creeperChainExplosionFuseTime.@Tooltip": "Time for a chained explosion to occur. Higher values mean a faster explosion. Set to -1 to disable",
   "text.survivality.config.option.noInitialSignEdit": "No Initial Sign Edit",
@@ -87,8 +87,6 @@
   "text.survivality.config.option.structurePotions.@Tooltip": "Find useful potions inside certain structure loot chests",
   "text.survivality.config.option.cactusHurtsHands": "Cactus Hurts Hands",
   "text.survivality.config.option.cactusHurtsHands.@Tooltip": "Cactus will prick when you begin to mine it with your hand",
-  "text.survivality.config.option.lightningSmeltsSand": "Lightning Smelts Sand",
-  "text.survivality.config.option.lightningSmeltsSand.@Tooltip": "Lightning strikes can turn Sand into Glass instantly",
 
   "text.survivality.config.option.unboundEnchant": "Unbound /enchant",
   "text.survivality.config.option.unboundEnchant.@Tooltip": "/enchant allows any level of enchantment"
