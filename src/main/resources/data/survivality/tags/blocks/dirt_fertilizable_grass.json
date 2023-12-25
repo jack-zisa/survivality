@@ -1,6 +1,6 @@
 {
   "values": [
-    "minecraft:grass",
+    "minecraft:short_grass",
     {
       "required": false,
       "id": "great_big_world:grassy_lavarock"

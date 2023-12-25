@@ -3,7 +3,7 @@ package com.github.creoii.survivality.mixin.misc;
 import com.github.creoii.survivality.Survivality;
 import com.github.creoii.survivality.integration.ModMenuIntegration;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.world.MobSpawnerLogic;
+import net.minecraft.block.spawner.MobSpawnerLogic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
