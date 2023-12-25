@@ -30,6 +30,6 @@
   "depends": {
     "fabricloader": ">=0.4.0",
     "minecraft": ">=1.20",
-    "creo": ">=1.0.0-beta.24"
+    "yet_another_config_lib_v3": "*"
   }
 }

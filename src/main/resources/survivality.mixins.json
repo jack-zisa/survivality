@@ -12,11 +12,11 @@
     "client.GameRendererMixin"
   ],
   "mixins": [
+    "block.AbstractBlockStateAccessor",
     "block.AbstractFurnaceBlockEntityMixin",
     "block.CactusBlockMixin",
     "block.FarmlandBlockMixin",
     "block.PointedDripstoneBlockMixin",
-    "block.SandBlockMixin",
     "block.SugarCaneBlockMixin",
     "compat.LithiumEntityCollisionsMixin",
     "creative.command.EnchantCommandMixin",
@@ -24,6 +24,7 @@
     "entity.AbstractMinecraftEntityMixin",
     "entity.CreeperEntityMixin",
     "entity.DrownedEntityMixin",
+    "entity.EntityTypeAccessor",
     "entity.EyeOfEnderEntityMixin",
     "entity.FireworkRocketEntityMixin",
     "entity.HorseEntityMixin",
@@ -36,6 +37,7 @@
     "item.BoneMealItemMixin",
     "item.CrossbowItemMixin",
     "item.FireworkRocketItemMixin",
+    "item.ItemAccessor",
     "item.ItemMixin",
     "item.ShovelItemMixin",
     "item.SignItemMixin",

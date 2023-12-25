@@ -123,9 +123,6 @@ public class SurvivalityConfig {
     public MutableFloat explosiveFuelExplosionChance = new MutableFloat(.25f);
 
     @ConfigEntry
-    public MutableBoolean snowFog = new MutableBoolean(true);
-
-    @ConfigEntry
     public MutableBoolean stackedPotions = new MutableBoolean(true);
 
     @ConfigEntry
@@ -151,9 +148,6 @@ public class SurvivalityConfig {
 
     @ConfigEntry
     public MutableBoolean cactusHurtsHands = new MutableBoolean(true);
-
-    @ConfigEntry
-    public MutableBoolean lightningSmeltsSand = new MutableBoolean(true);
 
     public YetAnotherConfigLib getYACL() {
         YetAnotherConfigLib config = YetAnotherConfigLib.createBuilder()
@@ -285,10 +279,6 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.explosiveFuelExplosionChance.@Tooltip"),
                                 explosiveFuelExplosionChance, .25f, 0f, 1f, .05f))
                         .option(createBooleanOption(
-                                Text.translatable("text.survivality.config.option.snowFog"),
-                                Text.translatable("text.survivality.config.option.snowFog.@Tooltip"),
-                                snowFog, true))
-                        .option(createBooleanOption(
                                 Text.translatable("text.survivality.config.option.stackedPotions"),
                                 Text.translatable("text.survivality.config.option.stackedPotions.@Tooltip"),
                                 stackedPotions, true))
@@ -324,10 +314,6 @@ public class SurvivalityConfig {
                                 Text.translatable("text.survivality.config.option.cactusHurtsHands"),
                                 Text.translatable("text.survivality.config.option.cactusHurtsHands.@Tooltip"),
                                 cactusHurtsHands, true))
-                        .option(createBooleanOption(
-                                Text.translatable("text.survivality.config.option.lightningSmeltsSand"),
-                                Text.translatable("text.survivality.config.option.lightningSmeltsSand.@Tooltip"),
-                                lightningSmeltsSand, true))
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("text.survivality.config.creative"))
@@ -416,8 +402,6 @@ public class SurvivalityConfig {
                 fertilizableDirt.setValue(survival.get("fertilize_dirt").getAsBoolean());
             if (survival.get("explosive_fuel_explosion_chance") != null)
                 explosiveFuelExplosionChance.setValue(survival.get("explosive_fuel_explosion_chance").getAsFloat());
-            if (survival.get("snow_fog") != null)
-                snowFog.setValue(survival.get("snow_fog").getAsBoolean());
             if (survival.get("stacked_potions") != null)
                 stackedPotions.setValue(survival.get("stacked_potions").getAsBoolean());
             if (survival.get("snow_golem_spawn_weight") != null)
@@ -436,8 +420,6 @@ public class SurvivalityConfig {
                 structurePotions.setValue(survival.get("structure_potions").getAsBoolean());
             if (survival.get("cactus_hurts_hands") != null)
                 cactusHurtsHands.setValue(survival.get("cactus_hurts_hands").getAsBoolean());
-            if (survival.get("lightning_smelts_sand") != null)
-                lightningSmeltsSand.setValue(survival.get("lightning_smelts_sand").getAsBoolean());
 
             if (creative.get("unbound_enchant") != null)
                 unboundEnchant.setValue(creative.get("unbound_enchant").getAsBoolean());
@@ -486,7 +468,6 @@ public class SurvivalityConfig {
             survival.addProperty("sugar_cane_grow_height", sugarCaneGrowHeight.intValue());
             survival.addProperty("fertilize_dirt", fertilizableDirt.booleanValue());
             survival.addProperty("explosive_fuel_explosion_chance", explosiveFuelExplosionChance.floatValue());
-            survival.addProperty("snow_fog", snowFog.booleanValue());
             survival.addProperty("stacked_potions", stackedPotions.booleanValue());
             survival.addProperty("snow_golem_spawn_weight", snowGolemSpawnWeight.intValue());
             survival.addProperty("snow_golem_max_spawn_size", snowGolemMaxSpawnSize.intValue());
@@ -496,7 +477,6 @@ public class SurvivalityConfig {
             survival.addProperty("slot_machine_gilded_blackstone", slotMachineGildedBlackstone.booleanValue());
             survival.addProperty("structure_potions", structurePotions.booleanValue());
             survival.addProperty("cactus_hurts_hands", cactusHurtsHands.booleanValue());
-            survival.addProperty("lightning_smelts_sand", lightningSmeltsSand.booleanValue());
 
             creative.addProperty("unbound_enchant", unboundEnchant.booleanValue());
 

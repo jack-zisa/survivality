@@ -1,11 +1,11 @@
 plugins {
-    id 'fabric-loom' version '1.2-SNAPSHOT'
+    id 'fabric-loom' version '1.4-SNAPSHOT'
     id 'maven-publish'
 }
 
 repositories {
     maven { url "https://maven.terraformersmc.com/releases/" }
-    maven { url 'https://maven.isxander.dev/releases' }
+    maven { url = "https://maven.isxander.dev/releases" }
     maven {
         url = uri "https://api.modrinth.com/maven"
         content {
@@ -30,10 +30,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modCompileOnly "maven.modrinth:lithium:${project.lithium_version}"
     modApi "com.terraformersmc:modmenu:${project.mod_menu_version}"
-    modApi "dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}"
-    modApi "maven.modrinth:creo-lib:${project.creo_lib_version}"
-}
-
-java {
-    withSourcesJar()
+    modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}") {
+        exclude group: "net.fabricmc"
+    }
 }

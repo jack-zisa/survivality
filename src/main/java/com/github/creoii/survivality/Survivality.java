@@ -1,12 +1,9 @@
 package com.github.creoii.survivality;
 
-import com.github.creoii.creolib.api.util.block.BlockUtil;
-import com.github.creoii.creolib.api.util.entity.EntityTypeUtil;
-import com.github.creoii.creolib.api.util.fog.FogContext;
-import com.github.creoii.creolib.api.util.fog.FogModifier;
-import com.github.creoii.creolib.api.util.fog.FogModifiers;
-import com.github.creoii.creolib.api.util.item.ItemUtil;
 import com.github.creoii.survivality.integration.ModMenuIntegration;
+import com.github.creoii.survivality.mixin.block.AbstractBlockStateAccessor;
+import com.github.creoii.survivality.mixin.entity.EntityTypeAccessor;
+import com.github.creoii.survivality.mixin.item.ItemAccessor;
 import com.github.creoii.survivality.util.SurvivalityTags;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -15,7 +12,6 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.render.FogShape;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnReason;
@@ -42,7 +38,6 @@ public class Survivality implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		boolean explosiveFuel = true;
-		boolean snowFog = true;
 		boolean stackedPotions = true;
 		boolean snowmenSpawn = true;
 		boolean harderBuddingAmethyst = true;
@@ -53,8 +48,6 @@ public class Survivality implements ModInitializer {
 
 			if (ModMenuIntegration.CONFIG.explosiveFuelExplosionChance.floatValue() == 0f)
 				explosiveFuel = false;
-			if (!ModMenuIntegration.CONFIG.snowFog.booleanValue())
-				snowFog = false;
 			if (!ModMenuIntegration.CONFIG.stackedPotions.booleanValue())
 				stackedPotions = false;
 			if (ModMenuIntegration.CONFIG.snowGolemSpawnWeight.intValue() < 0)
@@ -73,33 +66,20 @@ public class Survivality implements ModInitializer {
 		}
 
 		if (stackedPotions) {
-			ItemUtil.setMaxCount(Items.POTION, 16);
-			ItemUtil.setMaxCount(Items.SPLASH_POTION, 16);
-			ItemUtil.setMaxCount(Items.LINGERING_POTION, 16);
+			((ItemAccessor) Items.POTION).setMaxCount(16);
+			((ItemAccessor) Items.SPLASH_POTION).setMaxCount(16);
+			((ItemAccessor) Items.LINGERING_POTION).setMaxCount(16);
 		}
 
 		if (snowmenSpawn) {
-			EntityTypeUtil.setSpawnGroup(EntityType.SNOW_GOLEM, SpawnGroup.CREATURE);
+			((EntityTypeAccessor) EntityType.SNOW_GOLEM).setSpawnGroup(SpawnGroup.CREATURE);
 			SpawnRestriction.RESTRICTIONS.remove(EntityType.SNOW_GOLEM);
 			SpawnRestriction.register(EntityType.SNOW_GOLEM, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, Survivality::canSnowGolemSpawn);
 			BiomeModifications.addSpawn(BiomeSelectors.tag(SurvivalityTags.SNOW_GOLEM_BIOMES), SpawnGroup.CREATURE, EntityType.SNOW_GOLEM, ModMenuIntegration.CONFIG.snowGolemSpawnWeight.intValue(), 1, ModMenuIntegration.CONFIG.snowGolemMaxSpawnSize.intValue());
 		}
 
-		if (snowFog) {
-			FogModifiers.register(FogModifier.InjectionPoint.POST, new FogModifier.Builder()
-					.predicate(Survivality::snowFogPredicate)
-					.fogStart(196f)
-					.fogEnd(64f)
-					.fogShape(FogShape.SPHERE)
-					.densitySpeedSeconds(8)
-					.operation(FogModifier.Operation.ADD)
-					.color(15463935)
-					.build()
-			);
-		}
-
 		if (harderBuddingAmethyst)
-			BlockUtil.setHardness(Blocks.BUDDING_AMETHYST, 4.5f);
+			((AbstractBlockStateAccessor) Blocks.BUDDING_AMETHYST.getDefaultState()).setHardness(4.5f);
 
 		if (slotMachineGildedBlackstone)
 			replaceGildedBlackstoneLootTable();
@@ -111,14 +91,6 @@ public class Survivality implements ModInitializer {
 	public static boolean canSnowGolemSpawn(EntityType<? extends MobEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
 		BlockPos blockPos = pos.down();
 		return world.getBlockState(blockPos).allowsSpawning(world, blockPos, type);
-	}
-
-	public static boolean snowFogPredicate(FogContext fogContext) {
-		if (CONFIG_AVAILABLE && !ModMenuIntegration.CONFIG.snowFog.booleanValue()) return false;
-		if (!fogContext.world().isRaining()) return false;
-		return FogModifiers.testBiomeEntry(fogContext, biomeEntry -> {
-			return biomeEntry.isIn(SurvivalityTags.SNOW_FOG_BIOMES);
-		});
 	}
 
 	private static void replaceGildedBlackstoneLootTable() {

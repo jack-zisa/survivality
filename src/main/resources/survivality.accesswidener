@@ -10,3 +10,6 @@ accessible field net/minecraft/world/MobSpawnerLogic requiredPlayerRange I
 accessible field net/minecraft/block/entity/AbstractFurnaceBlockEntity inventory Lnet/minecraft/util/collection/DefaultedList;
 accessible field net/minecraft/block/entity/AbstractFurnaceBlockEntity cookTime I
 accessible field net/minecraft/entity/SpawnRestriction RESTRICTIONS Ljava/util/Map;
+mutable field net/minecraft/item/Item maxCount I
+mutable field net/minecraft/entity/EntityType spawnGroup Lnet/minecraft/entity/SpawnGroup;
+mutable field net/minecraft/block/AbstractBlock$AbstractBlockState hardness F
