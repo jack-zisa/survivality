@@ -14,9 +14,9 @@ repositories {
     }
 }
 
-version = project.mod_version
+version = mod_version + "+" + minecraft_version
 group = project.maven_group
-archivesBaseName = "${name}-${project.minecraft_version}"
+archivesBaseName = project.name
 
 loom {
     accessWidenerPath = file("src/main/resources/survivality.accesswidener")
